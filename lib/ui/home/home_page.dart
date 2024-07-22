@@ -1,8 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:notumcepte/common/carousel_slider.dart';
-import 'package:notumcepte/ui/home/utils/auth_container.dart';
-import 'package:notumcepte/ui/home/utils/login.dart';
+import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
+import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,133 +12,210 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    initialization();
-  }
-
-  void initialization() async {
-    await Future.delayed(const Duration(seconds: 3));
-    FlutterNativeSplash.remove();
-  }
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: K.kScaffoldBodyColor,
+      drawer: _buildDrawer(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const CustomCarouselSlider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  AuthentacionContainer(
-                    imageStr: "assets/uicons/not11.jpg",
-                    text: "Giriş Yap",
-                  ),
-                  AuthentacionContainer(
-                    imageStr: "assets/uicons/not14.jpg",
-                    text: "Kayıt Ol",
-                  ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: SizeConfig.screenHeight! * 0.025,
-                    horizontal: SizeConfig.screenWidth! * 0.07,
-                  ),
-                  child: Container(
-                    width: SizeConfig.screenWidth!,
-                    height: SizeConfig.screenHeight! * 0.14,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                            "assets/uicons/not1.jpg",
-                          ),
-                          fit: BoxFit.cover),
-                      border: Border.all(
-                        color: Colors.brown.shade400,
-                        width: 1,
-                      ),
-                      borderRadius:
-                          BorderRadius.circular(SizeConfig.screenWidth! * 0.03),
-                    ),
-                    child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Text(
-                          "En Çok Satılanlar",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(color: Colors.grey.shade600),
-                        )),
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SocialSupportContainer(
-                    imageStr: "assets/uicons/not2.jpg",
-                    text: "Haberler",
-                  ),
-                  SocialSupportContainer(
-                    imageStr: "assets/uicons/not13.jpg",
-                    text: "İletişim",
-                  ),
-                ],
-              )
-            ],
-          ),
+        child: Column(
+          children: [
+            _buildAppBarSide(),
+            _buildSearchArea(),
+            _buildCarouselSlider(),
+            _buildBodyArea()
+          ],
         ),
       ),
     );
   }
-}
 
-class SocialSupportContainer extends StatelessWidget {
-  final String imageStr;
-  final String text;
+  Drawer _buildDrawer() {
+    return Drawer(
+      shape: Border.all(style: BorderStyle.none),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          UserAccountsDrawerHeader(
+            accountName: Text("Mustafa Fatih Gündüz"),
+            accountEmail: Text("notumcepte@gmail.com"),
+            currentAccountPicture: ClipOval(
+              child: Image.asset("assets/profile-avatar.png"),
+            ),
+          ),
+          CustomListTile(
+            titleText: "Hesabım",
+            leadingIcon: Icons.person,
+          ),
+          CustomListTile(
+            titleText: "Notlarım",
+            leadingIcon: Icons.edit_document,
+          ),
+          CustomListTile(
+            titleText: "Kart İşlemleri",
+            leadingIcon: Icons.credit_card,
+          ),
+          CustomListTile(
+            titleText: "Favorilerim",
+            leadingIcon: Icons.favorite,
+          ),
+          CustomListTile(
+            titleText: "Bildirimler",
+            leadingIcon: Icons.notification_important,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.screenWidth! * 0.045,
+            ),
+            child: Divider(),
+          ),
+          CustomListTile(
+            titleText: "Yardım ve Destek",
+            leadingIcon: Icons.help,
+          ),
+          CustomListTile(
+            titleText: "Ayarlar",
+            leadingIcon: Icons.settings,
+          ),
+        ],
+      ),
+    );
+  }
 
-  SocialSupportContainer({
-    super.key,
-    required this.imageStr,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildAppBarSide() {
     return Container(
-      width: SizeConfig.screenWidth! * 0.38,
-      height: SizeConfig.screenHeight! * 0.15,
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Text(
-          text,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(color: Colors.grey.shade200),
-        ),
-      ),
+      width: double.infinity,
+      height: SizeConfig.screenHeight! * 0.07,
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.brown.shade400,
-          width: 1,
+        color: K.kContainerColor,
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeConfig.screenWidth! * 0.04,
         ),
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: AssetImage(imageStr),
-          fit: BoxFit.cover,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () => _scaffoldKey.currentState!.openDrawer(),
+              child: Icon(
+                Icons.menu,
+                color: K.kIconColor,
+              ),
+            ),
+            Icon(
+              Icons.abc,
+              color: K.kIconColor,
+            ),
+            Icon(
+              Icons.notifications,
+              color: K.kIconColor,
+            )
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildSearchArea() {
+    final TextEditingController _searchEditingController =
+        TextEditingController();
+
+    final List<Widget> trailingWidget = [
+      GestureDetector(
+        onTap: () {
+          _searchEditingController.text = "";
+        },
+        child: Icon(
+          Icons.clear,
+          size: K.kIconSize,
+        ),
+      ),
+      SizedBox(
+        width: K.kSizedBoxWidth,
+      ),
+      Icon(
+        Icons.filter_list,
+        size: K.kIconSize,
+      ),
+    ];
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: K.kHomePageHorizontalPadding,
+        vertical: K.kHomePageVerticalPadding,
+      ),
+      child: SearchBar(
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
+        controller: _searchEditingController,
+        side: WidgetStateProperty.all(BorderSide.none),
+        shape: WidgetStateProperty.all(RoundedRectangleBorder()),
+        backgroundColor: WidgetStateProperty.all(Colors.white),
+        shadowColor: WidgetStateProperty.all(Colors.transparent),
+        leading: Icon(Icons.search, color: K.kIconColor),
+        trailing: trailingWidget,
+        hintStyle: WidgetStatePropertyAll(
+          TextStyle(color: K.kTextColor),
+        ),
+        hintText: "Ders Notu Ara...",
+      ),
+    );
+  }
+
+  Widget _buildCarouselSlider() {
+    final List<String> carouselSliderItems = [
+      "https://i.dr.com.tr/pimages/Content/Uploads/BannerFiles/dr/anasayfa_1200x390-dr190720241346.webp",
+      "https://i.dr.com.tr/pimages/Content/Uploads/BannerFiles/dr/anasayfa_1200x390750-uzeri-75-TL-kupon-Firsati-Temmuzz.webp",
+      "https://i.dr.com.tr/pimages/Content/Uploads/BannerFiles/dr/kirtasiye-mayis-dr-anasayfa_1200x390.webp",
+      "https://i.dr.com.tr/pimages/Content/Uploads/BannerFiles/dr/anasayfa_1200x390-The-Kitap-3-Kitap-150-TL.webp",
+      "https://i.dr.com.tr/pimages/Content/Uploads/BannerFiles/dr/anasayfa_1200x390-Ayin-Yayinevi-Yapi-Kredi-Yayinlari.webp",
+    ];
+
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: K.kHomePageHorizontalPadding,
+      ),
+      child: Container(
+        width: double.infinity,
+        height: SizeConfig.screenHeight! * 0.3,
+        child: CarouselSlider(
+          items: carouselSliderItems.map((i) {
+            final index = carouselSliderItems.indexOf(i);
+            return Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    carouselSliderItems[index],
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+          options: CarouselOptions(
+              aspectRatio: 16 / 9,
+              viewportFraction: 1,
+              autoPlay: true,
+              autoPlayCurve: Curves.easeIn,
+              autoPlayInterval: Duration(seconds: 5),
+              disableCenter: true),
+        ),
+      ),
+    );
+  }
+
+  _buildBodyArea() {
+    return Column(
+      children: [
+        Container(
+          width: double.infinity,
+          height: SizeConfig.screenHeight! * 0.25,
+          decoration: BoxDecoration(color: Colors.white),
+        ),
+      ],
     );
   }
 }

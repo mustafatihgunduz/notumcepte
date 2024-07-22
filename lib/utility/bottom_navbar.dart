@@ -16,8 +16,6 @@ class BottomNavbar extends StatefulWidget {
 class _BottomNavbarState extends State<BottomNavbar> {
   int _selectedIndex = 0;
 
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-
   static const List<Widget> items = [
     HomePage(),
     SearchScreen(),
@@ -35,30 +33,38 @@ class _BottomNavbarState extends State<BottomNavbar> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        color: Color(0xffE6B9A6),
+      bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
-        buttonBackgroundColor: Color(0xffEEEDEB),
-        animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 300),
+        currentIndex: 0,
         onTap: _onBarItemTapped,
         items: [
-          Icon(
-            Icons.home,
-            size: SizeConfig.screenWidth! * 0.07,
+          BottomNavigationBarItem(
+            label: "",
+            icon: Icon(
+              Icons.home,
+              color: Colors.grey.shade700,
+            ),
           ),
-          Icon(
-            Icons.search,
-            size: SizeConfig.screenWidth! * 0.07,
+          BottomNavigationBarItem(
+            label: "",
+            icon: Icon(
+              Icons.search,
+              color: Colors.grey.shade700,
+            ),
           ),
-          Icon(
-            Icons.publish,
-            size: SizeConfig.screenWidth! * 0.07,
+          BottomNavigationBarItem(
+            label: "",
+            icon: Icon(
+              Icons.publish,
+              color: Colors.grey.shade700,
+            ),
           ),
-          Icon(
-            Icons.person,
-            size: SizeConfig.screenWidth! * 0.07,
+          BottomNavigationBarItem(
+            label: "",
+            icon: Icon(
+              Icons.person,
+              color: Colors.grey.shade700,
+            ),
           ),
         ],
       ),
