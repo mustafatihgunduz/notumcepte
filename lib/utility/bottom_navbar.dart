@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:notumcepte/ui/addnote/add_note_screen.dart';
 import 'package:notumcepte/ui/home/home_page.dart';

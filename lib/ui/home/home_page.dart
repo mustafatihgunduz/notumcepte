@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
@@ -12,28 +14,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       backgroundColor: K.kScaffoldBodyColor,
       drawer: _buildDrawer(),
       body: SafeArea(
-        child: Column(
-          children: [
-            _buildAppBarSide(),
-            _buildSearchArea(),
-            _buildCarouselSlider(),
-            _buildBodyArea()
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildAppBarSide(),
+              _buildSearchArea(),
+              _buildCarouselSlider(),
+              _buildMostSellArea(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Drawer _buildDrawer() {
+  Widget _buildDrawer() {
     return Drawer(
       shape: Border.all(style: BorderStyle.none),
       child: ListView(
@@ -100,7 +104,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: () => _scaffoldKey.currentState!.openDrawer(),
+              onTap: () => scaffoldKey.currentState!.openDrawer(),
               child: Icon(
                 Icons.menu,
                 color: K.kIconColor,
@@ -207,15 +211,96 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _buildBodyArea() {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          height: SizeConfig.screenHeight! * 0.25,
-          decoration: BoxDecoration(color: Colors.white),
-        ),
-      ],
+  Widget _buildMostSellArea() {
+    var systemHeight = View.of(context).display.size.height.toInt();
+    return Container(
+      constraints: BoxConstraints(
+        maxHeight: systemHeight >= 2400
+            ? SizeConfig.screenHeight! * 0.3
+            : SizeConfig.screenHeight! * 0.35,
+        minWidth: double.infinity,
+      ),
+      decoration: BoxDecoration(color: Colors.white),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: K.kHomePageHorizontalPadding,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "En Çok Satanlar",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.grey.shade600,
+                      ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Tümünü Görüntüle",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.blueAccent,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Flexible(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: K.kHomePageHorizontalPadding,
+                    ),
+                    child: SizedBox(
+                      width: SizeConfig.screenWidth! * 0.3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: SizeConfig.screenWidth! * 0.28,
+                            height: SizeConfig.screenHeight! * 0.16,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/uicons/ders-kitap${index + 1}.jpg"),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          Text(
+                            "Bilgisayar Mühendisliğine Giriş",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: Colors.black87),
+                          ),
+                          Text(
+                            "Mustafa Fatih",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(color: Colors.grey.shade600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+          )
+        ],
+      ),
     );
   }
 }
