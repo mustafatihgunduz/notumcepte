@@ -38,6 +38,8 @@ dependencies:
   carousel_slider: ^4.2.1
   internet_connection_checker: ^1.0.0+1
   device_info_plus: ^10.1.0
+  get: ^4.6.6
+  flutter_credit_card: ^4.0.1
 
 dev_dependencies:
   flutter_test:

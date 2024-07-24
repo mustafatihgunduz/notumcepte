@@ -7,6 +7,7 @@ class K {
   static Color kIconColor = Colors.grey;
   static Color kContainerColor = Colors.white;
   static Color kTextColor = Colors.grey.shade500;
+  static Color kExpansionTextColor = Colors.black;
 
   static double kIconSize = SizeConfig.screenWidth! * 0.055;
 

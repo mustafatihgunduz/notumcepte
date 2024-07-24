@@ -1,9 +1,12 @@
-import 'dart:ui';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:notumcepte/ui/creditcard/credit_card.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
+import 'package:notumcepte/ui/notifications/notifications.dart';
+import 'package:notumcepte/ui/whynotumcepte/why_notum_cepte.dart';
 import 'package:notumcepte/utility/constants.dart';
+import 'package:notumcepte/utility/routes.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,6 +62,7 @@ class _HomePageState extends State<HomePage> {
             leadingIcon: Icons.edit_document,
           ),
           CustomListTile(
+            onTap: () => Get.to(CreditCardScreen()),
             titleText: "Kart İşlemleri",
             leadingIcon: Icons.credit_card,
           ),
@@ -67,8 +71,20 @@ class _HomePageState extends State<HomePage> {
             leadingIcon: Icons.favorite,
           ),
           CustomListTile(
+            onTap: () => Get.to(Notifications()),
             titleText: "Bildirimler",
             leadingIcon: Icons.notification_important,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.screenWidth! * 0.045,
+            ),
+            child: Divider(),
+          ),
+          CustomListTile(
+            onTap: () => Get.to(WhyNotumCepte()),
+            leadingIcon: Icons.whatshot,
+            titleText: "Neden Notum Cepte ?",
           ),
           Padding(
             padding: EdgeInsets.symmetric(
