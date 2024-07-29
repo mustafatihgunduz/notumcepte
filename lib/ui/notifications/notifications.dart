@@ -19,13 +19,7 @@ class Notifications extends StatelessWidget {
             color: K.kIconColor,
           ),
         ),
-        title: Text(
-          "Bİldirimler",
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: K.kTextColor),
-        ),
+        title: Text("Bİldirimler", style: K.kAppbarTextStyle(context)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,17 +38,13 @@ class Notifications extends StatelessWidget {
           SizedBox(
             height: K.kHomePageVerticalPadding,
           ),
-          Container(
-            width: SizeConfig.screenWidth! / 2,
-            child: Center(
-              child: Text(
-                "Şu anda hiçbir bildiriminiz bulunmamaktadır.",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(color: K.kTextColor),
-              ),
-            ),
+          Text(
+            "Şu anda hiçbir bildiriminiz bulunmamaktadır.",
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(color: K.kTextColor),
+            textAlign: TextAlign.center,
           )
         ],
       ),

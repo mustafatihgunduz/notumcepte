@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:notumcepte/ui/addnote/add_note_screen.dart';
 import 'package:notumcepte/ui/home/home_page.dart';
 import 'package:notumcepte/ui/profile/profile_screen.dart';
-import 'package:notumcepte/ui/search/search_screen.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -17,7 +16,6 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   static const List<Widget> items = [
     HomePage(),
-    SearchScreen(),
     AddNoteScreen(),
     ProfileScreen()
   ];
@@ -41,13 +39,6 @@ class _BottomNavbarState extends State<BottomNavbar> {
             label: "",
             icon: Icon(
               Icons.home,
-              color: Colors.grey.shade700,
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: "",
-            icon: Icon(
-              Icons.search,
               color: Colors.grey.shade700,
             ),
           ),

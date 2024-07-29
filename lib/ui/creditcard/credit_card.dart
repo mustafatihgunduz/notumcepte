@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
@@ -18,10 +17,12 @@ class CreditCardScreen extends StatefulWidget {
 class _CreditCardScreenState extends State<CreditCardScreen> {
   GlobalKey<FormState> _creditCardForumKey = GlobalKey();
 
-  TextEditingController _cardNumberController = TextEditingController();
-  TextEditingController _cardHolderNameController = TextEditingController();
-  TextEditingController _cardExpireDateController = TextEditingController();
-  TextEditingController _cardCvvController = TextEditingController();
+  final TextEditingController _cardNumberController = TextEditingController();
+  final TextEditingController _cardHolderNameController =
+      TextEditingController();
+  final TextEditingController _cardExpireDateController =
+      TextEditingController();
+  final TextEditingController _cardCvvController = TextEditingController();
 
   String cardNumberHintText = "Kart Numaranızı Giriniz.";
 
@@ -62,6 +63,16 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: K.kScaffoldBodyColor,
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            color: K.kIconColor,
+          ),
+        ),
+        title: Text('Ödeme ekranı', style: K.kAppbarTextStyle(context)),
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -75,80 +86,144 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
               showBackView: true,
               onCreditCardWidgetChange: (p0) {},
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
+            Container(
+              margin: EdgeInsets.symmetric(
                 horizontal: K.kHomePageHorizontalPadding,
+                vertical: K.kHomePageVerticalPadding,
               ),
-              child: TextFormField(
-                onChanged: (value) {
-                  _formatCreditCardNumberInput();
-                },
-                onTap: () {
-                  setState(() {
-                    cardNumberHintText = "XXXX XXXX XXXX XXXX";
-                  });
-                },
-                inputFormatters: [LengthLimitingTextInputFormatter(19)],
-                keyboardType: TextInputType.number,
-                controller: _cardNumberController,
-                decoration: InputDecoration(
-                  label: Text("Kart Numarası"),
-                  hintText: cardNumberHintText,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: K.kHomePageHorizontalPadding,
-                vertical: K.kHomePageVerticalPadding * 2,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              width: double.infinity,
+              height: SizeConfig.screenHeight! * 0.4,
+              decoration: BoxDecoration(color: Colors.white),
+              child: Column(
                 children: [
-                  SizedBox(
-                    width: SizeConfig.screenWidth! * 0.4,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: K.kHomePageHorizontalPadding * 2,
+                      vertical: K.kHomePageVerticalPadding * 2,
+                    ),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
                       onChanged: (value) {
-                        _formatExpireDateInput();
+                        _formatCreditCardNumberInput();
                       },
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(
-                          5,
-                          maxLengthEnforcement: MaxLengthEnforcement.none,
-                        )
-                      ],
-                      controller: _cardExpireDateController,
-                      decoration: InputDecoration(
-                        label: Text("Son Kullanma Tarihi"),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: SizeConfig.screenWidth! * 0.4,
-                    child: TextFormField(
-                      onChanged: (value) {},
-                      onTap: () {},
-                      inputFormatters: [LengthLimitingTextInputFormatter(3)],
+                      onTap: () {
+                        setState(() {
+                          cardNumberHintText = "XXXX XXXX XXXX XXXX";
+                        });
+                      },
+                      inputFormatters: [LengthLimitingTextInputFormatter(19)],
                       keyboardType: TextInputType.number,
-                      controller: _cardCvvController,
+                      controller: _cardNumberController,
                       decoration: InputDecoration(
-                        label: Text("CVV"),
+                        label: Text("Kart Numarası"),
+                        hintText: cardNumberHintText,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.grey.shade400,
+                          ),
                         ),
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: K.kHomePageHorizontalPadding * 2,
+                      vertical: K.kHomePageVerticalPadding * 2,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: SizeConfig.screenWidth! * 0.4,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(
+                                5,
+                              )
+                            ],
+                            onChanged: (value) {
+                              _formatExpireDateInput();
+                            },
+                            controller: _cardExpireDateController,
+                            decoration: InputDecoration(
+                              label: Text("Son Kullanma Tarihi"),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                width: 1,
+                                color: Colors.grey.shade400,
+                              )),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: SizeConfig.screenWidth! * 0.4,
+                          child: TextFormField(
+                            onChanged: (value) {},
+                            onTap: () {},
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(3)
+                            ],
+                            keyboardType: TextInputType.number,
+                            controller: _cardCvvController,
+                            decoration: InputDecoration(
+                              label: Text("CVV"),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 1,
+                                  color: Colors.grey.shade400,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: K.kHomePageHorizontalPadding * 2,
+                      vertical: K.kHomePageVerticalPadding * 2,
+                    ),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: _cardHolderNameController,
+                      decoration: InputDecoration(
+                        label: Text("Kart Sahibi Adı"),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.grey.shade400,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: K.kHomePageHorizontalPadding * 2,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          overlayColor: WidgetStatePropertyAll(
+                              Colors.transparent.withOpacity(0.4)),
+                          textStyle: WidgetStatePropertyAll(
+                            TextStyle(color: Colors.black),
+                          ),
+                          backgroundColor: WidgetStatePropertyAll(
+                            Color(0xffD4AF37),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Text('Öde'),
+                      ),
+                    ),
+                  )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

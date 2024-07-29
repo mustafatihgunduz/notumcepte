@@ -1,12 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:notumcepte/ui/creditcard/credit_card.dart';
+import 'package:notumcepte/ui/helpandsupport/help_and_support.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
 import 'package:notumcepte/ui/notifications/notifications.dart';
+import 'package:notumcepte/ui/settings/settings.dart';
 import 'package:notumcepte/ui/whynotumcepte/why_notum_cepte.dart';
 import 'package:notumcepte/utility/constants.dart';
-import 'package:notumcepte/utility/routes.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,8 +18,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool isHidden = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +34,11 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _buildAppBarSide(),
+              isHidden ? Opacity(opacity: 0) : _buildAppBarSide(),
               _buildSearchArea(),
-              _buildCarouselSlider(),
-              _buildMostSellArea(),
+              isHidden ? Opacity(opacity: 0) : _buildCarouselSlider(),
+              isHidden ? Opacity(opacity: 0) : _buildMostSellArea(),
+              isHidden ? Opacity(opacity: 0) : _buildSpecialForYouArea(),
             ],
           ),
         ),
@@ -47,6 +53,7 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
+            decoration: BoxDecoration(color: Colors.blueGrey),
             accountName: Text("Mustafa Fatih Gündüz"),
             accountEmail: Text("notumcepte@gmail.com"),
             currentAccountPicture: ClipOval(
@@ -70,11 +77,6 @@ class _HomePageState extends State<HomePage> {
             titleText: "Favorilerim",
             leadingIcon: Icons.favorite,
           ),
-          CustomListTile(
-            onTap: () => Get.to(Notifications()),
-            titleText: "Bildirimler",
-            leadingIcon: Icons.notification_important,
-          ),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.screenWidth! * 0.045,
@@ -93,10 +95,12 @@ class _HomePageState extends State<HomePage> {
             child: Divider(),
           ),
           CustomListTile(
+            onTap: () => Get.to(HelpAndSupportPage()),
             titleText: "Yardım ve Destek",
             leadingIcon: Icons.help,
           ),
           CustomListTile(
+            onTap: () => Get.to(SettingsPage()),
             titleText: "Ayarlar",
             leadingIcon: Icons.settings,
           ),
@@ -130,9 +134,12 @@ class _HomePageState extends State<HomePage> {
               Icons.abc,
               color: K.kIconColor,
             ),
-            Icon(
-              Icons.notifications,
-              color: K.kIconColor,
+            GestureDetector(
+              onTap: () => Get.to(Notifications()),
+              child: Icon(
+                Icons.notifications,
+                color: K.kIconColor,
+              ),
             )
           ],
         ),
@@ -145,15 +152,6 @@ class _HomePageState extends State<HomePage> {
         TextEditingController();
 
     final List<Widget> trailingWidget = [
-      GestureDetector(
-        onTap: () {
-          _searchEditingController.text = "";
-        },
-        child: Icon(
-          Icons.clear,
-          size: K.kIconSize,
-        ),
-      ),
       SizedBox(
         width: K.kSizedBoxWidth,
       ),
@@ -168,19 +166,42 @@ class _HomePageState extends State<HomePage> {
         horizontal: K.kHomePageHorizontalPadding,
         vertical: K.kHomePageVerticalPadding,
       ),
-      child: SearchBar(
-        overlayColor: WidgetStateProperty.all(Colors.transparent),
-        controller: _searchEditingController,
-        side: WidgetStateProperty.all(BorderSide.none),
-        shape: WidgetStateProperty.all(RoundedRectangleBorder()),
-        backgroundColor: WidgetStateProperty.all(Colors.white),
-        shadowColor: WidgetStateProperty.all(Colors.transparent),
-        leading: Icon(Icons.search, color: K.kIconColor),
-        trailing: trailingWidget,
-        hintStyle: WidgetStatePropertyAll(
-          TextStyle(color: K.kTextColor),
-        ),
-        hintText: "Ders Notu Ara...",
+      child: Row(
+        children: [
+          SizedBox(
+            width: isHidden
+                ? SizeConfig.screenWidth! * 0.7
+                : SizeConfig.screenWidth! * 0.93,
+            child: SearchBar(
+              onTap: () {
+                setState(() {
+                  isHidden = true;
+                });
+              },
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              controller: _searchEditingController,
+              side: WidgetStateProperty.all(BorderSide.none),
+              shape: WidgetStateProperty.all(RoundedRectangleBorder()),
+              backgroundColor: WidgetStateProperty.all(Colors.white),
+              shadowColor: WidgetStateProperty.all(Colors.transparent),
+              leading: Icon(Icons.search, color: K.kIconColor),
+              trailing: trailingWidget,
+              hintStyle: WidgetStatePropertyAll(
+                TextStyle(color: K.kTextColor),
+              ),
+              hintText: "Ders Notu Ara...",
+            ),
+          ),
+          isHidden
+              ? TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isHidden = false;
+                    });
+                  },
+                  child: Text('Vazgeç'))
+              : Opacity(opacity: 0)
+        ],
       ),
     );
   }
@@ -250,6 +271,99 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   "En Çok Satanlar",
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.grey.shade600,
+                      ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Tümünü Görüntüle",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Colors.blueAccent,
+                        ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Flexible(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: K.kHomePageHorizontalPadding,
+                    ),
+                    child: SizedBox(
+                      width: SizeConfig.screenWidth! * 0.3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: SizeConfig.screenWidth! * 0.28,
+                            height: SizeConfig.screenHeight! * 0.16,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/uicons/ders-kitap${index + 1}.jpg"),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          Text(
+                            "Bilgisayar Mühendisliğine Giriş",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: Colors.black87),
+                          ),
+                          Text(
+                            "Mustafa Fatih",
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(color: Colors.grey.shade600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSpecialForYouArea() {
+    var systemHeight = View.of(context).display.size.height.toInt();
+    return Container(
+      constraints: BoxConstraints(
+        maxHeight: systemHeight >= 2400
+            ? SizeConfig.screenHeight! * 0.3
+            : SizeConfig.screenHeight! * 0.35,
+        minWidth: double.infinity,
+      ),
+      decoration: BoxDecoration(color: Colors.white),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: K.kHomePageHorizontalPadding,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Size Özel",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Colors.grey.shade600,
                       ),
