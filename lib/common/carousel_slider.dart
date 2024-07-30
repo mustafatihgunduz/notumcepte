@@ -37,7 +37,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
                 margin: EdgeInsets.all(
                   SizeConfig.screenWidth! * 0.01,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.transparent,
                 ),
                 child: Image.network(urlItems[index]),

@@ -30,7 +30,7 @@ class SettingsPage extends StatelessWidget {
                 text: 'Bildirim Ayarları',
               ),
               SettingsWidget(
-                onTap: () => Get.to(FAQPage()),
+                onTap: () => Get.to(const FAQPage()),
                 text: 'Sıkça Sorulan Sorular',
               ),
               SettingsWidget(
@@ -53,7 +53,7 @@ class SettingsWidget extends StatelessWidget {
   final String? text;
   final VoidCallback onTap;
 
-  SettingsWidget({super.key, this.text, required this.onTap});
+  const SettingsWidget({super.key, this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

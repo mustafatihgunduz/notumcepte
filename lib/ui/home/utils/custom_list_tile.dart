@@ -5,7 +5,7 @@ class CustomListTile extends StatelessWidget {
   final String? titleText;
   final VoidCallback? onTap;
 
-  CustomListTile({
+  const CustomListTile({
     super.key,
     this.onTap,
     this.leadingIcon,
@@ -23,7 +23,7 @@ class CustomListTile extends StatelessWidget {
         hoverColor: Colors.transparent,
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
-        trailing: Icon(
+        trailing: const Icon(
           Icons.arrow_forward_ios,
           size: 16,
         ),

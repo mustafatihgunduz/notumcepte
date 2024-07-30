@@ -15,7 +15,7 @@ class CreditCardScreen extends StatefulWidget {
 }
 
 class _CreditCardScreenState extends State<CreditCardScreen> {
-  GlobalKey<FormState> _creditCardForumKey = GlobalKey();
+  final GlobalKey<FormState> _creditCardForumKey = GlobalKey();
 
   final TextEditingController _cardNumberController = TextEditingController();
   final TextEditingController _cardHolderNameController =
