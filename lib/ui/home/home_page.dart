@@ -8,8 +8,10 @@ import 'package:notumcepte/ui/helpandsupport/help_and_support.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
 import 'package:notumcepte/ui/notes/my_notes.dart';
 import 'package:notumcepte/ui/notifications/notifications.dart';
+import 'package:notumcepte/ui/profile/profile_screen.dart';
 import 'package:notumcepte/ui/settings/settings.dart';
 import 'package:notumcepte/ui/whynotumcepte/why_notum_cepte.dart';
+import 'package:notumcepte/ui/wishlist/wishlist.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
@@ -62,12 +64,13 @@ class _HomePageState extends State<HomePage>
               child: Image.asset("assets/profile-avatar.png"),
             ),
           ),
-          const CustomListTile(
+          CustomListTile(
+            onTap: () => Get.to(const ProfileScreen()),
             titleText: "Hesabım",
             leadingIcon: Icons.person,
           ),
           CustomListTile(
-            onTap: () => Get.to(MyNotes()),
+            onTap: () => Get.to(const MyNotes()),
             titleText: "Notlarım",
             leadingIcon: Icons.edit_document,
           ),
@@ -77,9 +80,14 @@ class _HomePageState extends State<HomePage>
             leadingIcon: Icons.credit_card,
           ),
           CustomListTile(
-            onTap: () => Get.to(MyFavorites()),
+            onTap: () => Get.to(const MyFavorites()),
             titleText: "Favorilerim",
             leadingIcon: Icons.favorite,
+          ),
+          CustomListTile(
+            onTap: () => Get.to(const Wishlist()),
+            titleText: "İstek Listesi",
+            leadingIcon: Icons.list,
           ),
           Padding(
             padding: EdgeInsets.symmetric(
@@ -91,12 +99,6 @@ class _HomePageState extends State<HomePage>
             onTap: () => Get.to(const WhyNotumCepte()),
             leadingIcon: Icons.whatshot,
             titleText: "Neden Notum Cepte ?",
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.screenWidth! * 0.045,
-            ),
-            child: const Divider(),
           ),
           CustomListTile(
             onTap: () => Get.to(const HelpAndSupportPage()),
