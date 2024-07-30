@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:notumcepte/ui/creditcard/credit_card.dart';
+import 'package:notumcepte/ui/favorite/my_favorites.dart';
 import 'package:notumcepte/ui/helpandsupport/help_and_support.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
 import 'package:notumcepte/ui/notes/my_notes.dart';
@@ -75,7 +76,8 @@ class _HomePageState extends State<HomePage>
             titleText: "Kart İşlemleri",
             leadingIcon: Icons.credit_card,
           ),
-          const CustomListTile(
+          CustomListTile(
+            onTap: () => Get.to(MyFavorites()),
             titleText: "Favorilerim",
             leadingIcon: Icons.favorite,
           ),
