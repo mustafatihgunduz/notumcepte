@@ -28,14 +28,14 @@ class CustomProfileCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               offset: Offset(4, 4),
               blurRadius: 15,
               spreadRadius: 1,
               color: Colors.black,
             ),
             BoxShadow(
-              offset: Offset(-2, -2),
+              offset: const Offset(-2, -2),
               blurRadius: 15,
               spreadRadius: 0.1,
               color: Colors.grey.shade800,

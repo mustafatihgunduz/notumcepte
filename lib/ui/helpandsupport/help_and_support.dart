@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
@@ -64,7 +63,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                       .bodySmall!
                       .copyWith(color: K.kTextColor),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 2, color: Colors.black),
+                    borderSide: const BorderSide(width: 2, color: Colors.black),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -77,13 +76,6 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               ),
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text(
-                  'Gönder',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(color: K.kExpansionTextColor),
-                ),
                 style: ButtonStyle(
                   minimumSize: WidgetStatePropertyAll(
                     Size(
@@ -91,6 +83,13 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                       SizeConfig.screenHeight! * 0.06,
                     ),
                   ),
+                ),
+                child: Text(
+                  'Gönder',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(color: K.kExpansionTextColor),
                 ),
               ),
             ),

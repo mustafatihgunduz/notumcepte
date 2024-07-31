@@ -34,11 +34,11 @@ class _HomePageState extends State<HomePage>
         child: SingleChildScrollView(
           child: Column(
             children: [
-              isHidden ? Opacity(opacity: 0) : _buildAppBarSide(),
+              isHidden ? const Opacity(opacity: 0) : _buildAppBarSide(),
               _buildSearchArea(),
-              isHidden ? Opacity(opacity: 0) : _buildCarouselSlider(),
-              isHidden ? Opacity(opacity: 0) : _buildMostSellArea(),
-              isHidden ? Opacity(opacity: 0) : _buildSpecialForYouArea(),
+              isHidden ? const Opacity(opacity: 0) : _buildCarouselSlider(),
+              isHidden ? const Opacity(opacity: 0) : _buildMostSellArea(),
+              isHidden ? const Opacity(opacity: 0) : _buildSpecialForYouArea(),
             ],
           ),
         ),
@@ -53,27 +53,27 @@ class _HomePageState extends State<HomePage>
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(color: Colors.blueGrey),
-            accountName: Text("Mustafa Fatih Gündüz"),
-            accountEmail: Text("notumcepte@gmail.com"),
+            decoration: const BoxDecoration(color: Colors.blueGrey),
+            accountName: const Text("Mustafa Fatih Gündüz"),
+            accountEmail: const Text("notumcepte@gmail.com"),
             currentAccountPicture: ClipOval(
               child: Image.asset("assets/profile-avatar.png"),
             ),
           ),
-          CustomListTile(
+          const CustomListTile(
             titleText: "Hesabım",
             leadingIcon: Icons.person,
           ),
-          CustomListTile(
+          const CustomListTile(
             titleText: "Notlarım",
             leadingIcon: Icons.edit_document,
           ),
           CustomListTile(
-            onTap: () => Get.to(CreditCardScreen()),
+            onTap: () => Get.to(const CreditCardScreen()),
             titleText: "Kart İşlemleri",
             leadingIcon: Icons.credit_card,
           ),
-          CustomListTile(
+          const CustomListTile(
             titleText: "Favorilerim",
             leadingIcon: Icons.favorite,
           ),
@@ -81,10 +81,10 @@ class _HomePageState extends State<HomePage>
             padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.screenWidth! * 0.045,
             ),
-            child: Divider(),
+            child: const Divider(),
           ),
           CustomListTile(
-            onTap: () => Get.to(WhyNotumCepte()),
+            onTap: () => Get.to(const WhyNotumCepte()),
             leadingIcon: Icons.whatshot,
             titleText: "Neden Notum Cepte ?",
           ),
@@ -92,15 +92,15 @@ class _HomePageState extends State<HomePage>
             padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.screenWidth! * 0.045,
             ),
-            child: Divider(),
+            child: const Divider(),
           ),
           CustomListTile(
-            onTap: () => Get.to(HelpAndSupportPage()),
+            onTap: () => Get.to(const HelpAndSupportPage()),
             titleText: "Yardım ve Destek",
             leadingIcon: Icons.help,
           ),
           CustomListTile(
-            onTap: () => Get.to(SettingsPage()),
+            onTap: () => Get.to(const SettingsPage()),
             titleText: "Ayarlar",
             leadingIcon: Icons.settings,
           ),
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage>
               color: K.kIconColor,
             ),
             GestureDetector(
-              onTap: () => Get.to(Notifications()),
+              onTap: () => Get.to(const Notifications()),
               child: Icon(
                 Icons.notifications,
                 color: K.kIconColor,
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _buildSearchArea() {
-    final TextEditingController _searchEditingController =
+    final TextEditingController searchEditingController =
         TextEditingController();
 
     final List<Widget> trailingWidget = [
@@ -179,9 +179,9 @@ class _HomePageState extends State<HomePage>
                 });
               },
               overlayColor: WidgetStateProperty.all(Colors.transparent),
-              controller: _searchEditingController,
+              controller: searchEditingController,
               side: WidgetStateProperty.all(BorderSide.none),
-              shape: WidgetStateProperty.all(RoundedRectangleBorder()),
+              shape: WidgetStateProperty.all(const RoundedRectangleBorder()),
               backgroundColor: WidgetStateProperty.all(Colors.white),
               shadowColor: WidgetStateProperty.all(Colors.transparent),
               leading: Icon(Icons.search, color: K.kIconColor),
@@ -199,8 +199,8 @@ class _HomePageState extends State<HomePage>
                       isHidden = false;
                     });
                   },
-                  child: Text('Vazgeç'))
-              : Opacity(opacity: 0)
+                  child: const Text('Vazgeç'))
+              : const Opacity(opacity: 0)
         ],
       ),
     );
@@ -219,7 +219,7 @@ class _HomePageState extends State<HomePage>
       padding: EdgeInsets.symmetric(
         horizontal: K.kHomePageHorizontalPadding,
       ),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: SizeConfig.screenHeight! * 0.3,
         child: CarouselSlider(
@@ -241,7 +241,7 @@ class _HomePageState extends State<HomePage>
               viewportFraction: 1,
               autoPlay: true,
               autoPlayCurve: Curves.easeIn,
-              autoPlayInterval: Duration(seconds: 5),
+              autoPlayInterval: const Duration(seconds: 5),
               disableCenter: true),
         ),
       ),
@@ -257,7 +257,7 @@ class _HomePageState extends State<HomePage>
             : SizeConfig.screenHeight! * 0.35,
         minWidth: double.infinity,
       ),
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,7 +350,7 @@ class _HomePageState extends State<HomePage>
             : SizeConfig.screenHeight! * 0.35,
         minWidth: double.infinity,
       ),
-      decoration: BoxDecoration(color: Colors.white),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

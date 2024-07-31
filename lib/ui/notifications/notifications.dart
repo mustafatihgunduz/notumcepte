@@ -27,7 +27,7 @@ class Notifications extends StatelessWidget {
         children: [
           Container(
             height: SizeConfig.screenHeight! * 0.1,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                   "assets/uicons/notification-icon.png",

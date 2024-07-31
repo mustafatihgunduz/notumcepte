@@ -4,7 +4,7 @@ import 'package:notumcepte/utility/bottom_navbar.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(color: Colors.white),
+          appBarTheme: const AppBarTheme(color: Colors.white),
           useMaterial3: true,
         ),
-        home: BottomNavbar());
+        home: const BottomNavbar());
   }
 }

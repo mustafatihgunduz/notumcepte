@@ -57,7 +57,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             child: Container(
               width: double.infinity,
               height: SizeConfig.screenHeight! / 2,
-              decoration: BoxDecoration(color: Colors.white),
+              decoration: const BoxDecoration(color: Colors.white),
               child: Column(
                 children: [
                   Row(
