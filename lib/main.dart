@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:notumcepte/utility/bottom_navbar.dart';
 
 void main() async {
+  // ignore: unused_local_variable
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -12,13 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: const AppBarTheme(color: Colors.white),
-          useMaterial3: true,
-        ),
-        home: const BottomNavbar());
+      title: 'Notum Cepte',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(color: Colors.white),
+        useMaterial3: true,
+      ),
+      home: const BottomNavbar(),
+    );
   }
 }

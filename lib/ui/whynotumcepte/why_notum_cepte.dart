@@ -47,14 +47,10 @@ class WhyNotumCepte extends StatelessWidget {
           ),
           children: [
             Text(
-              "Platformumuzda yer alan tüm notlar, kalite ve güvenilirlik"
-              "açısından titizlikle incelenmiştir. Öğrencilerden gelen geri bildirimlerle sürekli"
-              "güncellenen ve doğrulanan içerikler sayesinde en doğru bilgiyi sunmayı hedefliyoruz.",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: K.kExpansionTextColor),
-            ),
+                "Platformumuzda yer alan tüm notlar, kalite ve güvenilirlik"
+                "açısından titizlikle incelenmiştir. Öğrencilerden gelen geri bildirimlerle sürekli"
+                "güncellenen ve doğrulanan içerikler sayesinde en doğru bilgiyi sunmayı hedefliyoruz.",
+                style: K.kExpansionTextStyle(context)),
           ],
           childrenPadding: EdgeInsets.symmetric(
             horizontal: K.kHomePageHorizontalPadding,

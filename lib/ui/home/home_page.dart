@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:notumcepte/ui/creditcard/credit_card.dart';
+import 'package:notumcepte/ui/favorite/my_favorites.dart';
 import 'package:notumcepte/ui/helpandsupport/help_and_support.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
+import 'package:notumcepte/ui/login/login.dart';
+import 'package:notumcepte/ui/notes/my_notes.dart';
 import 'package:notumcepte/ui/notifications/notifications.dart';
+import 'package:notumcepte/ui/profile/profile_screen.dart';
 import 'package:notumcepte/ui/settings/settings.dart';
 import 'package:notumcepte/ui/whynotumcepte/why_notum_cepte.dart';
+import 'package:notumcepte/ui/wishlist/wishlist.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
@@ -23,6 +28,7 @@ class _HomePageState extends State<HomePage>
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   bool isHidden = false;
+  bool isUserNull = true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,19 +58,51 @@ class _HomePageState extends State<HomePage>
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            decoration: const BoxDecoration(color: Colors.blueGrey),
-            accountName: const Text("Mustafa Fatih Gündüz"),
-            accountEmail: const Text("notumcepte@gmail.com"),
-            currentAccountPicture: ClipOval(
-              child: Image.asset("assets/profile-avatar.png"),
-            ),
-          ),
-          const CustomListTile(
+          isUserNull
+              ? SafeArea(
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        minRadius: SizeConfig.screenWidth! * 0.1,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: K.kHomePageHorizontalPadding * 2,
+                          vertical: K.kHomePageVerticalPadding / 2,
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.login),
+                            TextButton(
+                                onPressed: () => Get.to(LoginPage()),
+                                child: Text('Giriş Yap'))
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: SizeConfig.screenWidth! * 0.045,
+                        ),
+                        child: const Divider(),
+                      ),
+                    ],
+                  ),
+                )
+              : UserAccountsDrawerHeader(
+                  decoration: const BoxDecoration(color: Colors.blueGrey),
+                  accountName: const Text("Mustafa Fatih Gündüz"),
+                  accountEmail: const Text("notumcepte@gmail.com"),
+                  currentAccountPicture: ClipOval(
+                    child: Image.asset("assets/profile-avatar.png"),
+                  ),
+                ),
+          CustomListTile(
+            onTap: () => Get.to(const ProfileScreen()),
             titleText: "Hesabım",
             leadingIcon: Icons.person,
           ),
-          const CustomListTile(
+          CustomListTile(
+            onTap: () => Get.to(const MyNotes()),
             titleText: "Notlarım",
             leadingIcon: Icons.edit_document,
           ),
@@ -73,9 +111,15 @@ class _HomePageState extends State<HomePage>
             titleText: "Kart İşlemleri",
             leadingIcon: Icons.credit_card,
           ),
-          const CustomListTile(
+          CustomListTile(
+            onTap: () => Get.to(const MyFavorites()),
             titleText: "Favorilerim",
             leadingIcon: Icons.favorite,
+          ),
+          CustomListTile(
+            onTap: () => Get.to(const Wishlist()),
+            titleText: "İstek Listesi",
+            leadingIcon: Icons.list,
           ),
           Padding(
             padding: EdgeInsets.symmetric(
@@ -87,12 +131,6 @@ class _HomePageState extends State<HomePage>
             onTap: () => Get.to(const WhyNotumCepte()),
             leadingIcon: Icons.whatshot,
             titleText: "Neden Notum Cepte ?",
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.screenWidth! * 0.045,
-            ),
-            child: const Divider(),
           ),
           CustomListTile(
             onTap: () => Get.to(const HelpAndSupportPage()),
