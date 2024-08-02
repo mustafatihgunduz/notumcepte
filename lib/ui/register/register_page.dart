@@ -1,6 +1,6 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:notumcepte/common/custom_dropdownbutton.dart';
+import 'package:notumcepte/common/custom_textformfield.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
@@ -55,6 +55,12 @@ class _RegisterPageState extends State<RegisterPage> {
   String? facultySelectedValue;
   String? sectionSelectedValue;
   String? classSelectedValue;
+  int currentStep = 0;
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordCheckController =
+      TextEditingController();
   final TextEditingController _universityController = TextEditingController();
   final TextEditingController _facultyController = TextEditingController();
   final TextEditingController _sectionController = TextEditingController();
@@ -62,6 +68,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _emailController.dispose();
+    _passwordCheckController.dispose();
+    _passwordController.dispose();
     _universityController.dispose();
     _classController.dispose();
     _facultyController.dispose();
@@ -72,49 +81,117 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: K.kScaffoldBodyColor,
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomDropdownButton(
-                  items: universityItems,
-                  selectedValue: universitySelectedValue,
-                  controller: _universityController,
-                  hintText: 'Üniversite',
-                  searchHintText: 'Üniversite Ara..',
+            Stepper(
+              onStepContinue: () {
+                setState(() {
+                  if (currentStep != 2) {
+                    currentStep += 1;
+                  }
+                });
+              },
+              onStepCancel: () {
+                setState(() {
+                  if (currentStep != 0) {
+                    currentStep -= 1;
+                  }
+                });
+              },
+              currentStep: currentStep,
+              connectorColor: WidgetStatePropertyAll(Colors.green),
+              steps: [
+                Step(
+                  isActive: true,
+                  title: Text(
+                    'Kayıt ol',
+                    style: K.kRegistirationTextStyle(context),
+                  ),
+                  content: Form(
+                    child: Column(
+                      children: [
+                        CustomTextFormField(
+                            hintText: 'Email', controller: _emailController),
+                        CustomTextFormField(
+                            hintText: 'Şifre', controller: _passwordController),
+                        CustomTextFormField(
+                            hintText: 'Şifre Tekrarı',
+                            controller: _passwordCheckController),
+                      ],
+                    ),
+                  ),
                 ),
-                CustomDropdownButton(
-                  items: facultyItems,
-                  selectedValue: facultySelectedValue,
-                  controller: _facultyController,
-                  hintText: 'Fakükte',
-                  searchHintText: 'Fakülte Ara..',
+                Step(
+                  title: Text(
+                    'Eğitim Bilgileri',
+                    style: K.kRegistirationTextStyle(context),
+                  ),
+                  content: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: K.kHomePageHorizontalPadding,
+                          vertical: K.kHomePageVerticalPadding,
+                        ),
+                        child: CustomDropdownButton(
+                          items: universityItems,
+                          selectedValue: universitySelectedValue,
+                          controller: _universityController,
+                          hintText: 'Üniversite',
+                          searchHintText: 'Üniversite Ara..',
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: K.kHomePageHorizontalPadding,
+                          vertical: K.kHomePageVerticalPadding,
+                        ),
+                        child: CustomDropdownButton(
+                          items: facultyItems,
+                          selectedValue: facultySelectedValue,
+                          controller: _facultyController,
+                          hintText: 'Fakükte',
+                          searchHintText: 'Fakülte Ara..',
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: K.kHomePageHorizontalPadding,
+                          vertical: K.kHomePageVerticalPadding,
+                        ),
+                        child: CustomDropdownButton(
+                          items: sectionItems,
+                          selectedValue: sectionSelectedValue,
+                          controller: _sectionController,
+                          hintText: 'Bölüm',
+                          searchHintText: 'Bölüm Ara..',
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: K.kHomePageHorizontalPadding,
+                          vertical: K.kHomePageVerticalPadding,
+                        ),
+                        child: CustomDropdownButton(
+                          items: classItems,
+                          selectedValue: classSelectedValue,
+                          controller: _classController,
+                          hintText: 'Sınıf',
+                          searchHintText: 'Sınıf Ara..',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: SizeConfig.screenHeight! * 0.05,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomDropdownButton(
-                  items: sectionItems,
-                  selectedValue: sectionSelectedValue,
-                  controller: _sectionController,
-                  hintText: 'Bölüm',
-                  searchHintText: 'Bölüm Ara..',
-                ),
-                CustomDropdownButton(
-                  items: classItems,
-                  selectedValue: classSelectedValue,
-                  controller: _classController,
-                  hintText: 'Sınıf',
-                  searchHintText: 'Sınıf Ara..',
-                ),
+                Step(
+                    title: Text(
+                      'Kullanıcı Bilgileri',
+                      style: K.kRegistirationTextStyle(context),
+                    ),
+                    content: Column(
+                      children: [Text('1')],
+                    ))
               ],
             ),
           ],

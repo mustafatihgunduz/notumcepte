@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:notumcepte/utility/constants.dart';
@@ -55,12 +57,16 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
             horizontal: K.kHomePageHorizontalPadding,
           ),
           height: SizeConfig.screenHeight! * 0.05,
-          width: SizeConfig.screenWidth! * 0.4,
+          width: double.infinity,
         ),
         dropdownStyleData: DropdownStyleData(
-          decoration: BoxDecoration(color: Colors.white),
+          openInterval: Interval(0.25, 1),
+          padding: EdgeInsets.only(left: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           maxHeight: SizeConfig.screenHeight! * 0.3,
-          width: SizeConfig.screenWidth! * 0.4,
+          width: SizeConfig.screenWidth! * 0.8,
         ),
         menuItemStyleData: MenuItemStyleData(
           height: SizeConfig.screenHeight! * 0.06,

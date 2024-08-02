@@ -8,6 +8,7 @@ class K {
   static Color kContainerColor = Colors.white;
   static Color kTextColor = Colors.grey.shade500;
   static Color kExpansionTextColor = Colors.black;
+  static Color kDividerColor = Colors.grey.shade600;
 
   static double kIconSize = SizeConfig.screenWidth! * 0.055;
 
@@ -25,6 +26,20 @@ class K {
     TextStyle kAppbarTextStyle =
         Theme.of(context).textTheme.titleLarge!.copyWith(color: K.kTextColor);
     return kAppbarTextStyle;
+  }
+
+  static TextStyle? kRegistirationTextStyle(BuildContext context) {
+    TextStyle kRegistirationTextStyle =
+        Theme.of(context).textTheme.titleSmall!.copyWith(color: Colors.black);
+    return kRegistirationTextStyle;
+  }
+
+  static TextStyle? kDividerTextStyle(BuildContext context) {
+    TextStyle kDividerTextStyle = Theme.of(context)
+        .textTheme
+        .titleMedium!
+        .copyWith(color: Colors.grey.shade700);
+    return kDividerTextStyle;
   }
 
   static TextStyle? kDropdownButtonTextStyle(BuildContext context) {
