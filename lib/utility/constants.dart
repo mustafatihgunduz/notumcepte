@@ -26,4 +26,18 @@ class K {
         Theme.of(context).textTheme.titleLarge!.copyWith(color: K.kTextColor);
     return kAppbarTextStyle;
   }
+
+  static TextStyle? kDropdownButtonTextStyle(BuildContext context) {
+    TextStyle kDropdownButtonTextStyle = Theme.of(context)
+        .textTheme
+        .bodyMedium!
+        .copyWith(color: Colors.grey.shade700);
+    return kDropdownButtonTextStyle;
+  }
+
+  static TextStyle? kDropdownButtonMenuItemTextStyle(BuildContext context) {
+    TextStyle kDropdownButtonMenuItemTextStyle =
+        Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.black);
+    return kDropdownButtonMenuItemTextStyle;
+  }
 }
