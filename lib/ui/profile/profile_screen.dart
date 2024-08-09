@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notumcepte/ui/register/register_page.dart';
+import 'package:notumcepte/ui/authentacation/register/register_page.dart';
 import 'package:notumcepte/utility/constants.dart';
 
 class ProfileScreen extends StatefulWidget {

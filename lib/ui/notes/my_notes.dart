@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notumcepte/ui/addnote/add_note_screen.dart';
 import 'package:notumcepte/ui/home/home_page.dart';
 import 'package:notumcepte/utility/constants.dart';
+import 'package:notumcepte/utility/size_config.dart';
 
 class MyNotes extends StatefulWidget {
   const MyNotes({super.key});
@@ -32,6 +34,7 @@ class _MyNotesState extends State<MyNotes> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: K.kScaffoldBodyColor,
       appBar: AppBar(
+        backgroundColor: K.kAppBarColor,
         title: Text(
           'Notlarım',
           style: K.kAppbarTextStyle(context),
@@ -41,12 +44,15 @@ class _MyNotesState extends State<MyNotes> with TickerProviderStateMixin {
           child: Icon(
             Icons.arrow_back_ios_new,
             color: K.kIconColor,
+            size: K.kIconSize,
           ),
         ),
       ),
       body: Stack(children: [
         Container(
-          decoration: BoxDecoration(color: Colors.grey.shade100),
+          decoration: BoxDecoration(
+            color: K.kScaffoldBodyColor,
+          ),
           child: TabBarView(
             controller: _tabController,
             children: [
@@ -61,14 +67,18 @@ class _MyNotesState extends State<MyNotes> with TickerProviderStateMixin {
                       Text(
                         'Şu anda satın aldığınız bir not bulunmamaktadır. \nHadi notları keşfedelim',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge!
-                            .copyWith(color: Colors.grey),
+                        style: K.kExplanationTextStyle(context),
                       ),
-                      ElevatedButton(
+                      SizedBox(
+                        height: SizeConfig.screenHeight! * 0.02,
+                      ),
+                      CupertinoButton(
+                        color: K.kButtonColor,
                         onPressed: () => Get.offAll(const HomePage()),
-                        child: const Text('Notları Keşfet'),
+                        child: Text(
+                          'Notları Keşfet',
+                          style: K.kButtonTextStyle(context),
+                        ),
                       )
                     ],
                   ),
@@ -85,14 +95,18 @@ class _MyNotesState extends State<MyNotes> with TickerProviderStateMixin {
                       Text(
                         'Şu anda sattığınız bir not bulunmamaktadır. Diğer öğrencilerin notlarınıza erişmesini istiyorsanız not yükleme ekranına gidiniz',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge!
-                            .copyWith(color: Colors.grey),
+                        style: K.kExplanationTextStyle(context),
                       ),
-                      ElevatedButton(
+                      SizedBox(
+                        height: SizeConfig.screenHeight! * 0.02,
+                      ),
+                      CupertinoButton(
+                        color: K.kButtonColor,
                         onPressed: () => Get.to(const AddNoteScreen()),
-                        child: const Text('Not Yükleme'),
+                        child: Text(
+                          'Not Yükleme',
+                          style: K.kButtonTextStyle(context),
+                        ),
                       )
                     ],
                   ),
@@ -102,11 +116,10 @@ class _MyNotesState extends State<MyNotes> with TickerProviderStateMixin {
           ),
         ),
         TabBar(
-          indicatorColor: Colors.orange.shade200,
-          labelColor: Colors.black,
-          labelStyle: Theme.of(context).textTheme.titleMedium,
+          indicatorColor: K.kButtonColor,
+          labelColor: K.kButtonColor,
+          labelStyle: K.kTabBarTextStyle(context),
           unselectedLabelColor: Colors.grey.shade400,
-          indicator: const BoxDecoration(),
           overlayColor: WidgetStateColor.transparent,
           dividerHeight: 0,
           controller: _tabController,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notumcepte/utility/bottom_navbar.dart';
+import 'package:notumcepte/utility/constants.dart';
 
 void main() async {
   // ignore: unused_local_variable
@@ -16,9 +17,13 @@ class MyApp extends StatelessWidget {
       title: 'Notum Cepte',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(color: Colors.white),
-        useMaterial3: true,
+        primaryColor: K.kPrimaryColor,
+        scaffoldBackgroundColor: K.kScaffoldBodyColor,
+        appBarTheme: AppBarTheme(color: K.kAppBarColor),
+        buttonTheme: ButtonThemeData(buttonColor: K.kPrimaryColor),
+        progressIndicatorTheme: ProgressIndicatorThemeData(
+          color: K.kScaffoldBodyColor,
+        ),
       ),
       home: const BottomNavbar(),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:notumcepte/common/custom_dropdownbutton.dart';
 import 'package:notumcepte/common/custom_textformfield.dart';
 import 'package:notumcepte/utility/constants.dart';
@@ -81,6 +82,19 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: K.kScaffoldBodyColor,
+      appBar: AppBar(
+        backgroundColor: K.kAppBarColor,
+        leading: GestureDetector(
+          onTap: () => Get.back(),
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            size: K.kIconSize,
+            color: K.kIconColor,
+          ),
+        ),
+        title: Text("Kayıt ol", style: K.kAppbarTextStyle(context)),
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -105,19 +119,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 Step(
                   isActive: true,
                   title: Text(
-                    'Kayıt ol',
+                    'Kullanıcı Bilgileri',
                     style: K.kRegistirationTextStyle(context),
                   ),
                   content: Form(
                     child: Column(
                       children: [
                         CustomTextFormField(
-                            hintText: 'Email', controller: _emailController),
+                          hintText: 'Email',
+                          controller: _emailController,
+                        ),
                         CustomTextFormField(
-                            hintText: 'Şifre', controller: _passwordController),
+                          hintText: 'Şifre',
+                          controller: _passwordController,
+                        ),
                         CustomTextFormField(
-                            hintText: 'Şifre Tekrarı',
-                            controller: _passwordCheckController),
+                          hintText: 'Şifre Tekrarı',
+                          controller: _passwordCheckController,
+                        ),
                       ],
                     ),
                   ),
@@ -151,7 +170,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           items: facultyItems,
                           selectedValue: facultySelectedValue,
                           controller: _facultyController,
-                          hintText: 'Fakükte',
+                          hintText: 'Fakülte',
                           searchHintText: 'Fakülte Ara..',
                         ),
                       ),
@@ -186,7 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Step(
                     title: Text(
-                      'Kullanıcı Bilgileri',
+                      'Kişisel Bilgiler',
                       style: K.kRegistirationTextStyle(context),
                     ),
                     content: Column(

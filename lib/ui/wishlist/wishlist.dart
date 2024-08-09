@@ -15,6 +15,7 @@ class _WishlistState extends State<Wishlist> {
     return Scaffold(
       backgroundColor: K.kScaffoldBodyColor,
       appBar: AppBar(
+        backgroundColor: K.kAppBarColor,
         title: Text(
           'İstek Listem',
           style: K.kAppbarTextStyle(context),
@@ -24,6 +25,7 @@ class _WishlistState extends State<Wishlist> {
           child: Icon(
             Icons.arrow_back_ios_new,
             color: K.kIconColor,
+            size: K.kIconSize,
           ),
         ),
       ),
@@ -36,10 +38,7 @@ class _WishlistState extends State<Wishlist> {
             child: Text(
               'Şu anda istek listeniz boş gözüküyor. Daha sonrasında ulaşmak istediğiniz notları takibe alın',
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: K.kTextColor),
+              style: K.kExplanationTextStyle(context),
             ),
           )
         ],

@@ -11,6 +11,7 @@ class Notifications extends StatelessWidget {
     return Scaffold(
       backgroundColor: K.kScaffoldBodyColor,
       appBar: AppBar(
+        backgroundColor: K.kAppBarColor,
         leading: GestureDetector(
           onTap: () => Get.back(),
           child: Icon(
@@ -40,10 +41,7 @@ class Notifications extends StatelessWidget {
           ),
           Text(
             "Şu anda hiçbir bildiriminiz bulunmamaktadır.",
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: K.kTextColor),
+            style: K.kExplanationTextStyle(context),
             textAlign: TextAlign.center,
           )
         ],

@@ -38,8 +38,10 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
         items: widget.items
             .map((item) => DropdownMenuItem(
                   value: item,
-                  child: Text(item,
-                      style: K.kDropdownButtonMenuItemTextStyle(context)),
+                  child: Text(
+                    item,
+                    style: K.kDropdownButtonMenuItemTextStyle(context),
+                  ),
                 ))
             .toList(),
         value: widget.selectedValue,
@@ -49,10 +51,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           });
         },
         buttonStyleData: ButtonStyleData(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade700, width: 1.5),
-            borderRadius: BorderRadius.circular(10),
-          ),
+          decoration: K.kDropdownButtonMenuDecoration,
           padding: EdgeInsets.symmetric(
             horizontal: K.kHomePageHorizontalPadding,
           ),
@@ -63,7 +62,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           openInterval: Interval(0.25, 1),
           padding: EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: K.kScaffoldBodyColor,
           ),
           maxHeight: SizeConfig.screenHeight! * 0.3,
           width: SizeConfig.screenWidth! * 0.8,

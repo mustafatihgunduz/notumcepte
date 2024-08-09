@@ -22,20 +22,11 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: K.kDropdownButtonTextStyle(context),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(width: 1, color: Colors.black),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(width: 1, color: Colors.black),
-          ),
+          hintStyle: K.kRegistirationTextStyle(context),
+          enabledBorder: K.kOutlineInputBorder,
+          focusedBorder: K.kOutlineInputBorder,
           floatingLabelBehavior: FloatingLabelBehavior.never,
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: const BorderSide(width: 1, color: Colors.red),
-          ),
+          errorBorder: K.kErrorOutlineInputBorder,
         ),
       ),
     );

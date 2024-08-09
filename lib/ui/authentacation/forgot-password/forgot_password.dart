@@ -1,54 +1,54 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notumcepte/common/custom_textformfield.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
-class HelpAndSupportPage extends StatefulWidget {
-  const HelpAndSupportPage({super.key});
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({super.key});
 
   @override
-  State<HelpAndSupportPage> createState() => _HelpAndSupportPageState();
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
 
-class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final TextEditingController _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: K.kScaffoldBodyColor,
       appBar: AppBar(
-        backgroundColor: K.kAppBarColor,
         leading: GestureDetector(
           onTap: () => Get.back(),
           child: Icon(
             Icons.arrow_back_ios_new,
-            color: K.kIconColor,
             size: K.kIconSize,
+            color: K.kIconColor,
           ),
         ),
         title: Text(
-          'Yardım ve Destek',
+          'Şifre Sıfırlama',
           style: K.kAppbarTextStyle(context),
         ),
       ),
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: Icon(
-                Icons.support_agent,
-                size: SizeConfig.screenWidth! / 3,
-                color: K.kButtonColor,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: K.kHomePageHorizontalPadding,
-              ),
-              child: Text(
-                'Merhaba değerli kullanıcımız, \n Yaşadığınız sorunu bizimle paylaşmaktan çekinmeyiniz. Teknik destek ekibimiz sizlere en kısa sürede geri dönüş sağlayacaktır.',
-                style: K.kExplanationTextStyle(context),
-                textAlign: TextAlign.center,
+              child: Container(
+                width: SizeConfig.screenWidth! * 0.3,
+                child: Image.asset(
+                  'assets/uicons/forgot-password.png',
+                ),
               ),
             ),
             Padding(
@@ -56,16 +56,15 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                 horizontal: K.kHomePageHorizontalPadding,
                 vertical: K.kHomePageVerticalPadding,
               ),
-              child: TextFormField(
-                maxLength: 255,
-                maxLines: 6,
-                cursorHeight: SizeConfig.screenHeight! * 0.02,
-                decoration: InputDecoration(
-                  helperText: 'Maksimum 255 karakter',
-                  helperStyle: K.kTextFieldHelperTextStyle(context),
-                  border: K.kOutlineInputBorder,
-                ),
+              child: Text(
+                'Kayıtlı e-posta adresinizi aşağıdaki alana girin. Size bir şifre sıfırlama bağlantısı göndereceğiz.',
+                style: K.kExplanationTextStyle(context),
+                textAlign: TextAlign.center,
               ),
+            ),
+            CustomTextFormField(
+              hintText: 'Email Adresinizi Giriniz',
+              controller: _emailController,
             ),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -76,14 +75,14 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                 width: double.infinity,
                 child: CupertinoButton(
                   color: K.kButtonColor,
-                  onPressed: () {},
                   child: Text(
-                    'Gönder',
+                    'Sıfırla',
                     style: K.kButtonTextStyle(context),
                   ),
+                  onPressed: () {},
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

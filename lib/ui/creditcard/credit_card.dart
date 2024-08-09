@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -25,6 +26,7 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
   final TextEditingController _cardCvvController = TextEditingController();
 
   String cardNumberHintText = "Kart Numaranızı Giriniz.";
+  bool isDisable = false;
 
   void _formatCreditCardNumberInput() {
     String text =
@@ -59,6 +61,21 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
         selection: TextSelection.collapsed(offset: formattedText.length));
   }
 
+  void isDisabled() {
+    if (_cardHolderNameController.text.isEmpty &&
+        _cardNumberController.text.isEmpty &&
+        _cardExpireDateController.text.isEmpty &&
+        _cardCvvController.text.isEmpty) {
+      setState(() {
+        isDisable = true;
+      });
+    } else {
+      setState(() {
+        isDisable = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = View.of(context).display.size.height;
@@ -66,29 +83,22 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
     return Scaffold(
       backgroundColor: K.kScaffoldBodyColor,
       appBar: AppBar(
+        backgroundColor: K.kAppBarColor,
         leading: GestureDetector(
           onTap: () => Get.back(),
           child: Icon(
             Icons.arrow_back_ios_new,
             color: K.kIconColor,
+            size: K.kIconSize,
           ),
         ),
-        title: Text('Ödeme ekranı', style: K.kAppbarTextStyle(context)),
+        title: Text(
+          'Ödeme ekranı',
+          style: K.kAppbarTextStyle(context),
+        ),
       ),
       body: Column(
         children: [
-          CreditCardWidget(
-            height: SizeConfig.screenHeight! * 0.27,
-            width: double.infinity,
-            isHolderNameVisible: true,
-            cardBgColor: Color(0xffD4AF37),
-            cardNumber: _cardNumberController.text,
-            cardHolderName: "",
-            expiryDate: "",
-            cvvCode: "",
-            showBackView: true,
-            onCreditCardWidgetChange: (p0) {},
-          ),
           Container(
             margin: EdgeInsets.symmetric(
               horizontal: K.kHomePageHorizontalPadding,
@@ -98,7 +108,9 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
             height: height < 2400
                 ? SizeConfig.screenHeight! * 0.5
                 : SizeConfig.screenHeight! * 0.42,
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(
+              color: K.kContainerColor,
+            ),
             child: Column(
               children: [
                 Padding(
@@ -119,14 +131,13 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                     keyboardType: TextInputType.number,
                     controller: _cardNumberController,
                     decoration: InputDecoration(
-                      label: Text("Kart Numarası"),
-                      hintText: cardNumberHintText,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Colors.grey.shade400,
-                        ),
+                      label: Text(
+                        "Kart Numarası",
+                        style: K.kRegistirationTextStyle(context),
                       ),
+                      hintText: cardNumberHintText,
+                      border: K.kOutlineInputBorder,
+                      errorBorder: K.kErrorOutlineInputBorder,
                     ),
                   ),
                 ),
@@ -152,12 +163,12 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                           },
                           controller: _cardExpireDateController,
                           decoration: InputDecoration(
-                            label: Text("Son Kullanma Tarihi"),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              width: 1,
-                              color: Colors.grey.shade400,
-                            )),
+                            errorBorder: K.kErrorOutlineInputBorder,
+                            label: Text(
+                              "Son Kullanma Tarihi",
+                              style: K.kRegistirationTextStyle(context),
+                            ),
+                            border: K.kOutlineInputBorder,
                           ),
                         ),
                       ),
@@ -172,13 +183,12 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                           keyboardType: TextInputType.number,
                           controller: _cardCvvController,
                           decoration: InputDecoration(
-                            label: Text("CVV"),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 1,
-                                color: Colors.grey.shade400,
-                              ),
+                            label: Text(
+                              "CVV",
+                              style: K.kRegistirationTextStyle(context),
                             ),
+                            border: K.kOutlineInputBorder,
+                            errorBorder: K.kErrorOutlineInputBorder,
                           ),
                         ),
                       ),
@@ -194,13 +204,12 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                     keyboardType: TextInputType.text,
                     controller: _cardHolderNameController,
                     decoration: InputDecoration(
-                      label: Text("Kart Sahibi Adı"),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          width: 1,
-                          color: Colors.grey.shade400,
-                        ),
+                      label: Text(
+                        "Kart Sahibi Adı",
+                        style: K.kRegistirationTextStyle(context),
                       ),
+                      border: K.kOutlineInputBorder,
+                      errorBorder: K.kErrorOutlineInputBorder,
                     ),
                   ),
                 ),
@@ -210,19 +219,16 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                   ),
                   child: SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        overlayColor: WidgetStatePropertyAll(
-                            Colors.transparent.withOpacity(0.4)),
-                        textStyle: WidgetStatePropertyAll(
-                          TextStyle(color: Colors.black),
-                        ),
-                        backgroundColor: WidgetStatePropertyAll(
-                          Color(0xffD4AF37),
-                        ),
+                    child: CupertinoButton(
+                      color: K.kButtonColor,
+                      disabledColor: Colors.grey,
+                      child: Text(
+                        'Öde',
+                        style: K.kButtonTextStyle(context),
                       ),
-                      onPressed: () {},
-                      child: Text('Öde'),
+                      onPressed: () {
+                        isDisable ? null : Get.back();
+                      },
                     ),
                   ),
                 )

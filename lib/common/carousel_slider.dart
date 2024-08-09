@@ -40,7 +40,10 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
                 decoration: const BoxDecoration(
                   color: Colors.transparent,
                 ),
-                child: Image.network(urlItems[index]),
+                child: Image.network(
+                  urlItems[index],
+                  fit: BoxFit.cover,
+                ),
               );
             },
           ),

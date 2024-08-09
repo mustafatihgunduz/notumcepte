@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notumcepte/common/custom_textformfield.dart';
-import 'package:notumcepte/ui/register/register_page.dart';
+import 'package:notumcepte/ui/authentacation/forgot-password/forgot_password.dart';
+import 'package:notumcepte/ui/authentacation/register/register_page.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: K.kScaffoldBodyColor,
       body: SafeArea(
         child: Stack(
           children: [
@@ -37,7 +39,11 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.topLeft,
               child: IconButton(
                 onPressed: () => Get.back(),
-                icon: Icon(Icons.arrow_back_ios_new),
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: K.kIconColor,
+                  size: K.kIconSize,
+                ),
               ),
             ),
             Column(
@@ -60,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                     textStyle: Theme.of(context)
                         .textTheme
                         .displayLarge!
-                        .copyWith(color: Colors.black),
+                        .copyWith(color: K.kPrimaryColor),
                   ),
                 ),
                 CustomTextFormField(
@@ -98,8 +104,11 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       TextButton(
-                        onPressed: () {},
-                        child: Text('Şifreni mi unuttun?'),
+                        onPressed: () => Get.to(const ForgotPasswordPage()),
+                        child: Text(
+                          'Şifreni mi unuttun?',
+                          style: K.kTextButtonTextStyle(context),
+                        ),
                       )
                     ],
                   ),
@@ -110,58 +119,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: SizedBox(
                     width: double.infinity,
-                    child: CupertinoButton.filled(
-                      child: Text('Giriş Yap'),
+                    child: CupertinoButton(
+                      color: K.kButtonColor,
+                      child: Text(
+                        'Giriş Yap',
+                        style: K.kButtonTextStyle(context),
+                      ),
                       onPressed: () {},
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: K.kHomePageHorizontalPadding * 3,
-                    vertical: K.kHomePageVerticalPadding * 3,
-                  ),
-                  child: Row(
-                    children: [
-                      Flexible(
-                          child: Divider(
-                        color: K.kDividerColor,
-                        thickness: 1.5,
-                      )),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: K.kHomePageHorizontalPadding * 2,
-                        ),
-                        child: Text(
-                          'Veya',
-                          style: K.kDividerTextStyle(context),
-                        ),
-                      ),
-                      Flexible(
-                          child: Divider(
-                        color: K.kDividerColor,
-                        thickness: 1.5,
-                      )),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CircleAvatar(
-                      minRadius: SizeConfig.screenWidth! * 0.05,
-                      backgroundImage:
-                          const AssetImage('assets/uicons/google-logo.png'),
-                      backgroundColor: Colors.transparent,
-                    ),
-                    CircleAvatar(
-                      minRadius: SizeConfig.screenWidth! * 0.05,
-                      backgroundImage:
-                          const AssetImage('assets/uicons/apple-logo.png'),
-                      backgroundColor: Colors.transparent,
-                    ),
-                  ],
-                )
               ],
             ),
             Align(
@@ -175,7 +142,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextButton(
                     onPressed: () => Get.to(RegisterPage()),
-                    child: Text('Kayıt Ol'),
+                    child: Text(
+                      'Kayıt Ol',
+                      style: K.kTextButtonTextStyle(context),
+                    ),
                   ),
                 ],
               ),

@@ -6,7 +6,7 @@ import 'package:notumcepte/ui/creditcard/credit_card.dart';
 import 'package:notumcepte/ui/favorite/my_favorites.dart';
 import 'package:notumcepte/ui/helpandsupport/help_and_support.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
-import 'package:notumcepte/ui/login/login.dart';
+import 'package:notumcepte/ui/authentacation/login/login.dart';
 import 'package:notumcepte/ui/notes/my_notes.dart';
 import 'package:notumcepte/ui/notifications/notifications.dart';
 import 'package:notumcepte/ui/profile/profile_screen.dart';
@@ -27,8 +27,16 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final TextEditingController searchEditingController = TextEditingController();
+
   bool isHidden = false;
   bool isUserNull = true;
+
+  @override
+  void dispose() {
+    searchEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +62,7 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildDrawer() {
     return Drawer(
+      backgroundColor: K.kScaffoldBodyColor,
       shape: Border.all(style: BorderStyle.none),
       child: ListView(
         padding: EdgeInsets.zero,
@@ -72,10 +81,17 @@ class _HomePageState extends State<HomePage>
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.login),
+                            Icon(
+                              Icons.login,
+                              color: K.kIconColor,
+                            ),
                             TextButton(
-                                onPressed: () => Get.to(LoginPage()),
-                                child: Text('Giriş Yap'))
+                              onPressed: () => Get.to(LoginPage()),
+                              child: Text(
+                                'Giriş Yap',
+                                style: K.kTitleTextStyle(context),
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -83,7 +99,9 @@ class _HomePageState extends State<HomePage>
                         padding: EdgeInsets.symmetric(
                           horizontal: SizeConfig.screenWidth! * 0.045,
                         ),
-                        child: const Divider(),
+                        child: Divider(
+                          color: K.kDividerColor,
+                        ),
                       ),
                     ],
                   ),
@@ -125,7 +143,9 @@ class _HomePageState extends State<HomePage>
             padding: EdgeInsets.symmetric(
               horizontal: SizeConfig.screenWidth! * 0.045,
             ),
-            child: const Divider(),
+            child: Divider(
+              color: K.kDividerColor,
+            ),
           ),
           CustomListTile(
             onTap: () => Get.to(const WhyNotumCepte()),
@@ -186,16 +206,11 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget _buildSearchArea() {
-    final TextEditingController searchEditingController =
-        TextEditingController();
-
     final List<Widget> trailingWidget = [
-      SizedBox(
-        width: K.kSizedBoxWidth,
-      ),
       Icon(
         Icons.filter_list,
         size: K.kIconSize,
+        color: K.kIconColor,
       ),
     ];
 
@@ -218,15 +233,22 @@ class _HomePageState extends State<HomePage>
               },
               overlayColor: WidgetStateProperty.all(Colors.transparent),
               controller: searchEditingController,
-              side: WidgetStateProperty.all(BorderSide.none),
-              shape: WidgetStateProperty.all(const RoundedRectangleBorder()),
-              backgroundColor: WidgetStateProperty.all(Colors.white),
-              shadowColor: WidgetStateProperty.all(Colors.transparent),
-              leading: Icon(Icons.search, color: K.kIconColor),
-              trailing: trailingWidget,
-              hintStyle: WidgetStatePropertyAll(
-                TextStyle(color: K.kTextColor),
+              autoFocus: isHidden ? true : false,
+              side: WidgetStateProperty.all(K.kSearchBarBorderSide),
+              shape: WidgetStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
+              backgroundColor: WidgetStateProperty.all(K.kContainerColor),
+              shadowColor: WidgetStateProperty.all(Colors.transparent),
+              leading: Icon(
+                Icons.search,
+                color: K.kIconColor,
+                size: K.kIconSize,
+              ),
+              trailing: trailingWidget,
+              hintStyle: WidgetStatePropertyAll(K.kSearchBarTextStyle(context)),
               hintText: "Ders Notu Ara...",
             ),
           ),
@@ -237,7 +259,11 @@ class _HomePageState extends State<HomePage>
                       isHidden = false;
                     });
                   },
-                  child: const Text('Vazgeç'))
+                  child: Text(
+                    'Vazgeç',
+                    style: K.kTitleTextStyle(context),
+                  ),
+                )
               : const Opacity(opacity: 0)
         ],
       ),
@@ -288,186 +314,181 @@ class _HomePageState extends State<HomePage>
 
   Widget _buildMostSellArea() {
     var systemHeight = View.of(context).display.size.height.toInt();
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: systemHeight >= 2400
-            ? SizeConfig.screenHeight! * 0.3
-            : SizeConfig.screenHeight! * 0.35,
-        minWidth: double.infinity,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: K.kHomePageHorizontalPadding,
+        vertical: K.kHomePageVerticalPadding,
       ),
-      decoration: const BoxDecoration(color: Colors.white),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: K.kHomePageHorizontalPadding,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "En Çok Satanlar",
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Tümünü Görüntüle",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Colors.blueAccent,
-                        ),
+      child: Container(
+        constraints: BoxConstraints(
+          maxHeight: systemHeight >= 2400
+              ? SizeConfig.screenHeight! * 0.3
+              : SizeConfig.screenHeight! * 0.35,
+          minWidth: double.infinity,
+        ),
+        decoration: BoxDecoration(
+          color: K.kContainerColor,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: K.kHomePageHorizontalPadding,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "En Çok Satanlar",
+                    style: K.kContainerTextStyle(context),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Flexible(
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: K.kHomePageHorizontalPadding,
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Tümünü Görüntüle",
+                      style: K.kTextButtonTextStyle(context),
                     ),
-                    child: SizedBox(
-                      width: SizeConfig.screenWidth! * 0.3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: SizeConfig.screenWidth! * 0.28,
-                            height: SizeConfig.screenHeight! * 0.16,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              image: DecorationImage(
+                  ),
+                ],
+              ),
+            ),
+            Flexible(
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: K.kHomePageHorizontalPadding,
+                      ),
+                      child: SizedBox(
+                        width: SizeConfig.screenWidth! * 0.3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: SizeConfig.screenWidth! * 0.28,
+                              height: SizeConfig.screenHeight! * 0.16,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                image: DecorationImage(
                                   image: AssetImage(
                                       "assets/uicons/ders-kitap${index + 1}.jpg"),
-                                  fit: BoxFit.cover),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
-                          ),
-                          Text(
-                            "Bilgisayar Mühendisliğine Giriş",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(color: Colors.black87),
-                          ),
-                          Text(
-                            "Mustafa Fatih",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(color: Colors.grey.shade600),
-                          ),
-                        ],
+                            Text(
+                              "Bilgisayar Mühendisliğine Giriş",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: K.kContainerTextStyle(context),
+                            ),
+                            Text(
+                              "Mustafa Fatih",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: K.kContainerSubtitleTextStyle(context),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }),
-          )
-        ],
+                    );
+                  }),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildSpecialForYouArea() {
     var systemHeight = View.of(context).display.size.height.toInt();
-    return Container(
-      constraints: BoxConstraints(
-        maxHeight: systemHeight >= 2400
-            ? SizeConfig.screenHeight! * 0.3
-            : SizeConfig.screenHeight! * 0.35,
-        minWidth: double.infinity,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: K.kHomePageHorizontalPadding,
+        vertical: K.kHomePageVerticalPadding,
       ),
-      decoration: const BoxDecoration(color: Colors.white),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: K.kHomePageHorizontalPadding,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Size Özel",
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.grey.shade600,
-                      ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Tümünü Görüntüle",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Colors.blueAccent,
-                        ),
+      child: Container(
+        constraints: BoxConstraints(
+          maxHeight: systemHeight >= 2400
+              ? SizeConfig.screenHeight! * 0.3
+              : SizeConfig.screenHeight! * 0.35,
+          minWidth: double.infinity,
+        ),
+        decoration: BoxDecoration(color: K.kContainerColor),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: K.kHomePageHorizontalPadding,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Size Özel",
+                    style: K.kContainerTextStyle(context),
                   ),
-                ),
-              ],
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Tümünü Görüntüle",
+                      style: K.kTextButtonTextStyle(context),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Flexible(
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: K.kHomePageHorizontalPadding,
-                    ),
-                    child: SizedBox(
-                      width: SizeConfig.screenWidth! * 0.3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: SizeConfig.screenWidth! * 0.28,
-                            height: SizeConfig.screenHeight! * 0.16,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/uicons/ders-kitap${index + 1}.jpg"),
-                                  fit: BoxFit.cover),
-                            ),
-                          ),
-                          Text(
-                            "Bilgisayar Mühendisliğine Giriş",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(color: Colors.black87),
-                          ),
-                          Text(
-                            "Mustafa Fatih",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(color: Colors.grey.shade600),
-                          ),
-                        ],
+            Flexible(
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: K.kHomePageHorizontalPadding,
                       ),
-                    ),
-                  );
-                }),
-          )
-        ],
+                      child: SizedBox(
+                        width: SizeConfig.screenWidth! * 0.3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: SizeConfig.screenWidth! * 0.28,
+                              height: SizeConfig.screenHeight! * 0.16,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/uicons/ders-kitap${index + 1}.jpg"),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
+                            Text(
+                              "Bilgisayar Mühendisliğine Giriş",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: K.kContainerTextStyle(context),
+                            ),
+                            Text(
+                              "Mustafa Fatih",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: K.kContainerSubtitleTextStyle(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+            )
+          ],
+        ),
       ),
     );
   }

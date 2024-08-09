@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notumcepte/utility/constants.dart';
 
 class CustomListTile extends StatelessWidget {
   final IconData? leadingIcon;
@@ -17,14 +18,21 @@ class CustomListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: ListTile(
-        leading: Icon(leadingIcon),
-        title: Text(titleText!),
+        leading: Icon(
+          leadingIcon,
+          color: K.kIconColor,
+        ),
+        title: Text(
+          titleText!,
+          style: K.kTitleTextStyle(context),
+        ),
         iconColor: Colors.grey.shade600,
         hoverColor: Colors.transparent,
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
-        trailing: const Icon(
+        trailing: Icon(
           Icons.arrow_forward_ios,
+          color: K.kIconColor,
           size: 16,
         ),
       ),

@@ -11,14 +11,19 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: K.kScaffoldBodyColor,
       appBar: AppBar(
+        backgroundColor: K.kAppBarColor,
         leading: GestureDetector(
           onTap: () => Get.back(),
           child: Icon(
             Icons.arrow_back_ios_new,
             color: K.kIconColor,
+            size: K.kIconSize,
           ),
         ),
-        title: Text('Ayarlar', style: K.kAppbarTextStyle(context)),
+        title: Text(
+          'Ayarlar',
+          style: K.kAppbarTextStyle(context),
+        ),
       ),
       body: ListView.builder(
         itemCount: 1,
@@ -64,10 +69,7 @@ class SettingsWidget extends StatelessWidget {
       focusColor: Colors.transparent,
       title: Text(
         text!,
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(color: K.kExpansionTextColor),
+        style: K.kExpansionTitleTextStyle(context),
       ),
       trailing: Icon(
         Icons.arrow_forward_ios,
