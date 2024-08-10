@@ -7,10 +7,12 @@ import 'package:notumcepte/ui/favorite/my_favorites.dart';
 import 'package:notumcepte/ui/helpandsupport/help_and_support.dart';
 import 'package:notumcepte/ui/home/utils/custom_list_tile.dart';
 import 'package:notumcepte/ui/authentacation/login/login.dart';
+import 'package:notumcepte/ui/most-sell/most_sell_page.dart';
 import 'package:notumcepte/ui/notes/my_notes.dart';
 import 'package:notumcepte/ui/notifications/notifications.dart';
 import 'package:notumcepte/ui/profile/profile_screen.dart';
 import 'package:notumcepte/ui/settings/settings.dart';
+import 'package:notumcepte/ui/special-for-you/special_for_you_page.dart';
 import 'package:notumcepte/ui/whynotumcepte/why_notum_cepte.dart';
 import 'package:notumcepte/ui/wishlist/wishlist.dart';
 import 'package:notumcepte/utility/constants.dart';
@@ -345,7 +347,7 @@ class _HomePageState extends State<HomePage>
                     style: K.kContainerTextStyle(context),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Get.to(MostSellPage()),
                     child: Text(
                       "Tümünü Görüntüle",
                       style: K.kTextButtonTextStyle(context),
@@ -435,7 +437,7 @@ class _HomePageState extends State<HomePage>
                     style: K.kContainerTextStyle(context),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Get.to(SpecialForYouPage()),
                     child: Text(
                       "Tümünü Görüntüle",
                       style: K.kTextButtonTextStyle(context),

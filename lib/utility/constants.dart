@@ -127,6 +127,22 @@ class K {
     return kTextButtonTextStyle;
   }
 
+  static TextStyle? kListTileTitleTextStyle(BuildContext context) {
+    TextStyle kListTileTitleTextStyle =
+        Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Colors.white,
+            );
+    return kListTileTitleTextStyle;
+  }
+
+  static TextStyle? kListTileSubTitleTextStyle(BuildContext context) {
+    TextStyle kListTileSubTitleTextStyle =
+        Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Colors.white,
+            );
+    return kListTileSubTitleTextStyle;
+  }
+
   static BorderSide kSearchBarBorderSide = BorderSide(
     width: 1.5,
     color: Colors.grey.shade600,
