@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
 class K {
-  static Color kPrimaryColor = Color(0xffF44A01);
-  static Color kScaffoldBodyColor = Color(0xff2C2C2C);
-  static Color kAppBarColor = Color(0xff2C2C2C);
+  static Color kPrimaryColor = const Color(0xffF44A01);
+  static Color kScaffoldBodyColor = const Color(0xff2C2C2C);
+  static Color kAppBarColor = const Color(0xff2C2C2C);
   static Color kIconColor = Colors.white70;
-  static Color kContainerColor = Color(0xff353537);
+  static Color kContainerColor = const Color(0xff353537);
   static Color kTextColor = Colors.white;
   static Color kExpansionTextColor = Colors.black;
   static Color kDividerColor = Colors.grey.shade600;
-  static Color kButtonColor = Color(0xffF44A01);
+  static Color kButtonColor = const Color(0xffF44A01);
 
   static double kIconSize = SizeConfig.screenWidth! * 0.055;
 
@@ -125,6 +125,22 @@ class K {
               color: K.kPrimaryColor,
             );
     return kTextButtonTextStyle;
+  }
+
+  static TextStyle? kListTileTitleTextStyle(BuildContext context) {
+    TextStyle kListTileTitleTextStyle =
+        Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Colors.white,
+            );
+    return kListTileTitleTextStyle;
+  }
+
+  static TextStyle? kListTileSubTitleTextStyle(BuildContext context) {
+    TextStyle kListTileSubTitleTextStyle =
+        Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: Colors.white,
+            );
+    return kListTileSubTitleTextStyle;
   }
 
   static BorderSide kSearchBarBorderSide = BorderSide(

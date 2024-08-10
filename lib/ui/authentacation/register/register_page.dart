@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:notumcepte/common/custom_dropdownbutton.dart';
 import 'package:notumcepte/common/custom_textformfield.dart';
 import 'package:notumcepte/utility/constants.dart';
-import 'package:notumcepte/utility/size_config.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -96,124 +95,126 @@ class _RegisterPageState extends State<RegisterPage> {
         title: Text("Kayıt ol", style: K.kAppbarTextStyle(context)),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Stepper(
-              onStepContinue: () {
-                setState(() {
-                  if (currentStep != 2) {
-                    currentStep += 1;
-                  }
-                });
-              },
-              onStepCancel: () {
-                setState(() {
-                  if (currentStep != 0) {
-                    currentStep -= 1;
-                  }
-                });
-              },
-              currentStep: currentStep,
-              connectorColor: WidgetStatePropertyAll(Colors.green),
-              steps: [
-                Step(
-                  isActive: true,
-                  title: Text(
-                    'Kullanıcı Bilgileri',
-                    style: K.kRegistirationTextStyle(context),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stepper(
+                onStepContinue: () {
+                  setState(() {
+                    if (currentStep != 2) {
+                      currentStep += 1;
+                    }
+                  });
+                },
+                onStepCancel: () {
+                  setState(() {
+                    if (currentStep != 0) {
+                      currentStep -= 1;
+                    }
+                  });
+                },
+                currentStep: currentStep,
+                connectorColor: const WidgetStatePropertyAll(Colors.green),
+                steps: [
+                  Step(
+                    isActive: true,
+                    title: Text(
+                      'Kullanıcı Bilgileri',
+                      style: K.kRegistirationTextStyle(context),
+                    ),
+                    content: Form(
+                      child: Column(
+                        children: [
+                          CustomTextFormField(
+                            hintText: 'Email',
+                            controller: _emailController,
+                          ),
+                          CustomTextFormField(
+                            hintText: 'Şifre',
+                            controller: _passwordController,
+                          ),
+                          CustomTextFormField(
+                            hintText: 'Şifre Tekrarı',
+                            controller: _passwordCheckController,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  content: Form(
-                    child: Column(
+                  Step(
+                    title: Text(
+                      'Eğitim Bilgileri',
+                      style: K.kRegistirationTextStyle(context),
+                    ),
+                    content: Column(
                       children: [
-                        CustomTextFormField(
-                          hintText: 'Email',
-                          controller: _emailController,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: K.kHomePageHorizontalPadding,
+                            vertical: K.kHomePageVerticalPadding,
+                          ),
+                          child: CustomDropdownButton(
+                            items: universityItems,
+                            selectedValue: universitySelectedValue,
+                            controller: _universityController,
+                            hintText: 'Üniversite',
+                            searchHintText: 'Üniversite Ara..',
+                          ),
                         ),
-                        CustomTextFormField(
-                          hintText: 'Şifre',
-                          controller: _passwordController,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: K.kHomePageHorizontalPadding,
+                            vertical: K.kHomePageVerticalPadding,
+                          ),
+                          child: CustomDropdownButton(
+                            items: facultyItems,
+                            selectedValue: facultySelectedValue,
+                            controller: _facultyController,
+                            hintText: 'Fakülte',
+                            searchHintText: 'Fakülte Ara..',
+                          ),
                         ),
-                        CustomTextFormField(
-                          hintText: 'Şifre Tekrarı',
-                          controller: _passwordCheckController,
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: K.kHomePageHorizontalPadding,
+                            vertical: K.kHomePageVerticalPadding,
+                          ),
+                          child: CustomDropdownButton(
+                            items: sectionItems,
+                            selectedValue: sectionSelectedValue,
+                            controller: _sectionController,
+                            hintText: 'Bölüm',
+                            searchHintText: 'Bölüm Ara..',
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: K.kHomePageHorizontalPadding,
+                            vertical: K.kHomePageVerticalPadding,
+                          ),
+                          child: CustomDropdownButton(
+                            items: classItems,
+                            selectedValue: classSelectedValue,
+                            controller: _classController,
+                            hintText: 'Sınıf',
+                            searchHintText: 'Sınıf Ara..',
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                Step(
-                  title: Text(
-                    'Eğitim Bilgileri',
-                    style: K.kRegistirationTextStyle(context),
-                  ),
-                  content: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: K.kHomePageHorizontalPadding,
-                          vertical: K.kHomePageVerticalPadding,
-                        ),
-                        child: CustomDropdownButton(
-                          items: universityItems,
-                          selectedValue: universitySelectedValue,
-                          controller: _universityController,
-                          hintText: 'Üniversite',
-                          searchHintText: 'Üniversite Ara..',
-                        ),
+                  Step(
+                      title: Text(
+                        'Kişisel Bilgiler',
+                        style: K.kRegistirationTextStyle(context),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: K.kHomePageHorizontalPadding,
-                          vertical: K.kHomePageVerticalPadding,
-                        ),
-                        child: CustomDropdownButton(
-                          items: facultyItems,
-                          selectedValue: facultySelectedValue,
-                          controller: _facultyController,
-                          hintText: 'Fakülte',
-                          searchHintText: 'Fakülte Ara..',
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: K.kHomePageHorizontalPadding,
-                          vertical: K.kHomePageVerticalPadding,
-                        ),
-                        child: CustomDropdownButton(
-                          items: sectionItems,
-                          selectedValue: sectionSelectedValue,
-                          controller: _sectionController,
-                          hintText: 'Bölüm',
-                          searchHintText: 'Bölüm Ara..',
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: K.kHomePageHorizontalPadding,
-                          vertical: K.kHomePageVerticalPadding,
-                        ),
-                        child: CustomDropdownButton(
-                          items: classItems,
-                          selectedValue: classSelectedValue,
-                          controller: _classController,
-                          hintText: 'Sınıf',
-                          searchHintText: 'Sınıf Ara..',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Step(
-                    title: Text(
-                      'Kişisel Bilgiler',
-                      style: K.kRegistirationTextStyle(context),
-                    ),
-                    content: Column(
-                      children: [Text('1')],
-                    ))
-              ],
-            ),
-          ],
+                      content: const Column(
+                        children: [Text('1')],
+                      ))
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

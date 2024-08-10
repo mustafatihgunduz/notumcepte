@@ -21,6 +21,9 @@ class CustomTextFormField extends StatelessWidget {
         vertical: K.kHomePageVerticalPadding,
       ),
       child: TextFormField(
+        scrollPadding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom / 2,
+        ),
         controller: controller,
         decoration: InputDecoration(
           hintText: hintText,

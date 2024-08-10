@@ -59,8 +59,8 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           width: double.infinity,
         ),
         dropdownStyleData: DropdownStyleData(
-          openInterval: Interval(0.25, 1),
-          padding: EdgeInsets.only(left: 10),
+          openInterval: const Interval(0.25, 1),
+          padding: const EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
             color: K.kScaffoldBodyColor,
           ),

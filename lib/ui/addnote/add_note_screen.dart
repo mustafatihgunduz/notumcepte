@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notumcepte/utility/constants.dart';
-import 'package:notumcepte/utility/size_config.dart';
 
 class AddNoteScreen extends StatefulWidget {
   const AddNoteScreen({super.key});
@@ -20,7 +19,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
           style: K.kAppbarTextStyle(context),
         ),
       ),
-      body: Column(
+      body: const Column(
         children: [],
       ),
     );

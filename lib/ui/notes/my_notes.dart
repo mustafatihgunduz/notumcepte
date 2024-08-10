@@ -18,7 +18,6 @@ class _MyNotesState extends State<MyNotes> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
   }
