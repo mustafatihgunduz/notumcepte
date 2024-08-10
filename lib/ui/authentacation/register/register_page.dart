@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:notumcepte/common/custom_dropdownbutton.dart';
 import 'package:notumcepte/common/custom_textformfield.dart';
 import 'package:notumcepte/utility/constants.dart';
-import 'package:notumcepte/utility/size_config.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
