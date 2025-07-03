@@ -1,28 +1,37 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:notumcepte/core/provider/theme_provider.dart';
+import 'package:notumcepte/firebase_options.dart';
 import 'package:notumcepte/utility/bottom_navbar.dart';
 import 'package:notumcepte/utility/constants.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   // ignore: unused_local_variable
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) {
+      print('main.dart: ThemeProvider oluşturuldu.');
+      return ThemeProvider();
+    }),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Notum Cepte',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: K.kPrimaryColor,
-        scaffoldBackgroundColor: K.kScaffoldBodyColor,
-        appBarTheme: AppBarTheme(color: K.kAppBarColor),
+        scaffoldBackgroundColor: K.kdarkScaffoldBodyColor,
+        appBarTheme: AppBarTheme(color: K.kdarkAppBarColor),
         buttonTheme: ButtonThemeData(buttonColor: K.kPrimaryColor),
         progressIndicatorTheme: ProgressIndicatorThemeData(
-          color: K.kScaffoldBodyColor,
+          color: K.kdarkScaffoldBodyColor,
         ),
       ),
       home: const BottomNavbar(),

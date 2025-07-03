@@ -1,0 +1,2 @@
+C:/Users/Gaming/Desktop/repo/notumcepte/android/app/.cxx/Debug/392w4047/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Gaming/Desktop/repo/notumcepte/android/app/.cxx/Debug/392w4047/x86_64/CMakeFiles/rebuild_cache.dir

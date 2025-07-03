@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "557557877145",
+    "project_id": "notumcepte-3bde9",
+    "storage_bucket": "notumcepte-3bde9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557557877145:android:06151ebb9ed0097af12b08",
+        "android_client_info": {
+          "package_name": "com.notumcepte.notumcepte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557557877145-bji68qikcngdkgfdv910nb8jfli4ebne.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeSxOn-pMISFKwyXTNjq20F5jo3oI8F2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557557877145-bji68qikcngdkgfdv910nb8jfli4ebne.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "557557877145-kt07ehcnmqdnnle2lo5q4g5t25hbna9r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.notumcepte.notumcepte"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

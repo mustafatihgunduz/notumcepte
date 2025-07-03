@@ -2,8 +2,10 @@
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:notumcepte/core/provider/theme_provider.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
+import 'package:provider/provider.dart';
 
 class CustomDropdownButton extends StatefulWidget {
   CustomDropdownButton({
@@ -28,6 +30,8 @@ class CustomDropdownButton extends StatefulWidget {
 class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    bool isDarkMode = theme.isDarkMode;
     return DropdownButtonHideUnderline(
       child: DropdownButton2<String>(
         isExpanded: true,
@@ -62,7 +66,9 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           openInterval: const Interval(0.25, 1),
           padding: const EdgeInsets.only(left: 10),
           decoration: BoxDecoration(
-            color: K.kScaffoldBodyColor,
+            color: isDarkMode
+                ? K.kdarkScaffoldBodyColor
+                : K.kwhiteScaffoldBodyColor,
           ),
           maxHeight: SizeConfig.screenHeight! * 0.3,
           width: SizeConfig.screenWidth! * 0.8,

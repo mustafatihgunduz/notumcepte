@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as myCarouselSlider;
 import 'package:flutter/material.dart';
 import 'package:notumcepte/utility/size_config.dart';
 
@@ -23,7 +23,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
+    return myCarouselSlider.CarouselSlider(
       items: urlItems.map((i) {
         var index = urlItems.indexOf(i);
         return Padding(
@@ -47,7 +47,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
           ),
         );
       }).toList(),
-      options: CarouselOptions(
+      options: myCarouselSlider.CarouselOptions(
         height: SizeConfig.screenHeight! * 0.28,
         viewportFraction: 1,
         initialPage: 0,

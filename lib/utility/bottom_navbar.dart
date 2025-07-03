@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:notumcepte/ui/addnote/add_note_screen.dart';
-import 'package:notumcepte/ui/home/home_page.dart';
-import 'package:notumcepte/ui/profile/profile_screen.dart';
+import 'package:notumcepte/core/provider/theme_provider.dart';
+import 'package:notumcepte/view/addnote/add_note_screen.dart';
+import 'package:notumcepte/view/home/home_page.dart';
+import 'package:notumcepte/view/profile/profile_screen.dart';
 import 'package:notumcepte/utility/constants.dart';
 import 'package:notumcepte/utility/size_config.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -29,10 +31,13 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    bool isDarkMode = theme.isDarkMode;
     SizeConfig().init(context);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: K.kScaffoldBodyColor,
+        backgroundColor:
+            isDarkMode ? K.kdarkScaffoldBodyColor : K.kwhiteScaffoldBodyColor,
         currentIndex: 0,
         onTap: _onBarItemTapped,
         items: [
@@ -40,7 +45,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             label: "",
             icon: Icon(
               Icons.home,
-              color: K.kIconColor,
+              color: isDarkMode ? K.kdarkIconColor : K.kwhiteIconColor,
               size: K.kIconSize * 1.1,
             ),
           ),
@@ -48,7 +53,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             label: "",
             icon: Icon(
               Icons.publish,
-              color: K.kIconColor,
+              color: isDarkMode ? K.kdarkIconColor : K.kwhiteIconColor,
               size: K.kIconSize * 1.1,
             ),
           ),
@@ -56,7 +61,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             label: "",
             icon: Icon(
               Icons.person,
-              color: K.kIconColor,
+              color: isDarkMode ? K.kdarkIconColor : K.kwhiteIconColor,
               size: K.kIconSize * 1.1,
             ),
           ),

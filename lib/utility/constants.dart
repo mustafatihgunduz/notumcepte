@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:notumcepte/core/provider/theme_provider.dart';
 import 'package:notumcepte/utility/size_config.dart';
+import 'package:provider/provider.dart';
 
 class K {
-  static Color kPrimaryColor = const Color(0xffF44A01);
-  static Color kScaffoldBodyColor = const Color(0xff2C2C2C);
-  static Color kAppBarColor = const Color(0xff2C2C2C);
-  static Color kIconColor = Colors.white70;
-  static Color kContainerColor = const Color(0xff353537);
-  static Color kTextColor = Colors.white;
+  static Color kPrimaryColor = Color(0xffF44A01);
   static Color kExpansionTextColor = Colors.black;
   static Color kDividerColor = Colors.grey.shade600;
-  static Color kButtonColor = const Color(0xffF44A01);
+  static Color kButtonColor = Color(0xffF44A01);
+
+  static Color kdarkScaffoldBodyColor = Color(0xff222831);
+  static Color kdarkAppBarColor = Color(0xff393E46);
+  static Color kdarkIconColor = Color(0xffFAF6E9);
+  static Color kdarkContainerColor = Color(0xff393E46);
+  static Color kdarkTextColor = Colors.white;
+
+  static Color kwhiteScaffoldBodyColor = Color(0xff222831);
+  static Color kwhiteAppBarColor = Color(0xff393E46);
+  static Color kwhiteIconColor = Color(0xffFAF6E9);
+  static Color kwhiteContainerColor = Color(0xff393E46);
+  static Color kwhiteTextColor = Colors.white;
 
   static double kIconSize = SizeConfig.screenWidth! * 0.055;
 
@@ -31,8 +40,12 @@ class K {
   }
 
   static TextStyle? kAppbarTextStyle(BuildContext context) {
-    TextStyle kAppbarTextStyle =
-        Theme.of(context).textTheme.titleLarge!.copyWith(color: K.kTextColor);
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    bool isDarkMode = theme.isDarkMode;
+    TextStyle kAppbarTextStyle = Theme.of(context)
+        .textTheme
+        .titleLarge!
+        .copyWith(color: isDarkMode ? K.kdarkTextColor : K.kwhiteTextColor);
     return kAppbarTextStyle;
   }
 
@@ -65,8 +78,12 @@ class K {
   }
 
   static TextStyle? kTitleTextStyle(BuildContext context) {
-    TextStyle kTitleTextStyle =
-        Theme.of(context).textTheme.titleSmall!.copyWith(color: K.kTextColor);
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    bool isDarkMode = theme.isDarkMode;
+    TextStyle kTitleTextStyle = Theme.of(context)
+        .textTheme
+        .titleSmall!
+        .copyWith(color: isDarkMode ? K.kdarkTextColor : K.kwhiteTextColor);
     return kTitleTextStyle;
   }
 
@@ -84,22 +101,32 @@ class K {
   }
 
   static TextStyle? kSearchBarTextStyle(BuildContext context) {
-    TextStyle kSearchBarTextStyle =
-        Theme.of(context).textTheme.titleMedium!.copyWith(color: K.kTextColor);
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    bool isDarkMode = theme.isDarkMode;
+    TextStyle kSearchBarTextStyle = Theme.of(context)
+        .textTheme
+        .titleMedium!
+        .copyWith(color: isDarkMode ? K.kdarkTextColor : K.kwhiteTextColor);
     return kSearchBarTextStyle;
   }
 
   static TextStyle? kButtonTextStyle(BuildContext context) {
-    TextStyle kButtonTextStyle =
-        Theme.of(context).textTheme.titleMedium!.copyWith(color: K.kTextColor);
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    bool isDarkMode = theme.isDarkMode;
+    TextStyle kButtonTextStyle = Theme.of(context)
+        .textTheme
+        .titleMedium!
+        .copyWith(color: isDarkMode ? K.kdarkTextColor : K.kwhiteTextColor);
     return kButtonTextStyle;
   }
 
   static TextStyle? kContainerTextStyle(BuildContext context) {
-    TextStyle kContainerTextStyle =
-        Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Colors.white60,
-            );
+    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    bool isDarkMode = theme.isDarkMode;
+    TextStyle kContainerTextStyle = Theme.of(context)
+        .textTheme
+        .bodyMedium!
+        .copyWith(color: isDarkMode ? K.kdarkTextColor : K.kwhiteTextColor);
     return kContainerTextStyle;
   }
 
