@@ -31,7 +31,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     SizeConfig().init(context);
     return Scaffold(

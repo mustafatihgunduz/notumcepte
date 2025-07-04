@@ -15,11 +15,11 @@ class K {
   static Color kdarkContainerColor = Color(0xff393E46);
   static Color kdarkTextColor = Colors.white;
 
-  static Color kwhiteScaffoldBodyColor = Color(0xff222831);
-  static Color kwhiteAppBarColor = Color(0xff393E46);
-  static Color kwhiteIconColor = Color(0xffFAF6E9);
-  static Color kwhiteContainerColor = Color(0xff393E46);
-  static Color kwhiteTextColor = Colors.white;
+  static Color kwhiteScaffoldBodyColor = Color(0xffEEEEEE);
+  static Color kwhiteAppBarColor = Color(0xffDDDDDD);
+  static Color kwhiteIconColor = Color(0xff333446);
+  static Color kwhiteContainerColor = Color(0xffDDDDDD);
+  static Color kwhiteTextColor = Colors.black;
 
   static double kIconSize = SizeConfig.screenWidth! * 0.055;
 
@@ -40,7 +40,7 @@ class K {
   }
 
   static TextStyle? kAppbarTextStyle(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     TextStyle kAppbarTextStyle = Theme.of(context)
         .textTheme
@@ -78,7 +78,7 @@ class K {
   }
 
   static TextStyle? kTitleTextStyle(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     TextStyle kTitleTextStyle = Theme.of(context)
         .textTheme
@@ -101,7 +101,7 @@ class K {
   }
 
   static TextStyle? kSearchBarTextStyle(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     TextStyle kSearchBarTextStyle = Theme.of(context)
         .textTheme
@@ -111,7 +111,7 @@ class K {
   }
 
   static TextStyle? kButtonTextStyle(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     TextStyle kButtonTextStyle = Theme.of(context)
         .textTheme
@@ -121,7 +121,7 @@ class K {
   }
 
   static TextStyle? kContainerTextStyle(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     TextStyle kContainerTextStyle = Theme.of(context)
         .textTheme

@@ -13,7 +13,7 @@ class Wishlist extends StatefulWidget {
 class _WishlistState extends State<Wishlist> {
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     return Scaffold(
       backgroundColor:

@@ -16,7 +16,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     return Scaffold(
       backgroundColor:
@@ -122,7 +122,7 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     return Card(
       margin: EdgeInsets.symmetric(

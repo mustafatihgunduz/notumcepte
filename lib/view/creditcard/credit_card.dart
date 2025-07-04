@@ -78,7 +78,7 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     var height = View.of(context).display.size.height;
 

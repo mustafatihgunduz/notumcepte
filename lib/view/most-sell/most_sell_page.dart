@@ -13,7 +13,7 @@ class MostSellPage extends StatefulWidget {
 class _MostSellPageState extends State<MostSellPage> {
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     return Scaffold(
       backgroundColor:

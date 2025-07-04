@@ -26,8 +26,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   final TextEditingController searchEditingController = TextEditingController();
@@ -43,30 +42,24 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     return Scaffold(
       key: scaffoldKey,
       backgroundColor:
           isDarkMode ? K.kdarkScaffoldBodyColor : K.kwhiteScaffoldBodyColor,
-      drawer: _buildDrawer(isDarkMode),
+      drawer: _buildDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              isHidden
-                  ? const Opacity(opacity: 0)
-                  : _buildAppBarSide(isDarkMode),
-              _buildSearchArea(isDarkMode),
+              isHidden ? const Opacity(opacity: 0) : _buildAppBarSide(),
+              _buildSearchArea(),
               isHidden
                   ? const Opacity(opacity: 0)
                   : const CustomCarouselSlider(),
-              isHidden
-                  ? const Opacity(opacity: 0)
-                  : _buildMostSellArea(isDarkMode),
-              isHidden
-                  ? const Opacity(opacity: 0)
-                  : _buildSpecialForYouArea(isDarkMode),
+              isHidden ? const Opacity(opacity: 0) : _buildMostSellArea(),
+              isHidden ? const Opacity(opacity: 0) : _buildSpecialForYouArea(),
             ],
           ),
         ),
@@ -74,7 +67,9 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildDrawer(bool isDarkMode) {
+  Widget _buildDrawer() {
+    final theme = Provider.of<ThemeProvider>(context);
+    bool isDarkMode = theme.isDarkMode;
     return Drawer(
       backgroundColor:
           isDarkMode ? K.kdarkScaffoldBodyColor : K.kwhiteScaffoldBodyColor,
@@ -220,7 +215,9 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildAppBarSide(bool isDarkMode) {
+  Widget _buildAppBarSide() {
+    final theme = Provider.of<ThemeProvider>(context);
+    bool isDarkMode = theme.isDarkMode;
     return Container(
       width: double.infinity,
       height: SizeConfig.screenHeight! * 0.07,
@@ -260,7 +257,9 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildSearchArea(bool isDarkMode) {
+  Widget _buildSearchArea() {
+    final theme = Provider.of<ThemeProvider>(context);
+    bool isDarkMode = theme.isDarkMode;
     final List<Widget> trailingWidget = [
       Icon(
         Icons.filter_list,
@@ -326,7 +325,9 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildMostSellArea(bool isDarkMode) {
+  Widget _buildMostSellArea() {
+    final theme = Provider.of<ThemeProvider>(context);
+    bool isDarkMode = theme.isDarkMode;
     var systemHeight = View.of(context).display.size.height.toInt();
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -422,7 +423,9 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildSpecialForYouArea(bool isDarkMode) {
+  Widget _buildSpecialForYouArea() {
+    final theme = Provider.of<ThemeProvider>(context);
+    bool isDarkMode = theme.isDarkMode;
     var systemHeight = View.of(context).display.size.height.toInt();
     return Padding(
       padding: EdgeInsets.symmetric(

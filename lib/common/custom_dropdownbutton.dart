@@ -30,7 +30,7 @@ class CustomDropdownButton extends StatefulWidget {
 class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeProvider>(context, listen: false);
+    final theme = Provider.of<ThemeProvider>(context);
     bool isDarkMode = theme.isDarkMode;
     return DropdownButtonHideUnderline(
       child: DropdownButton2<String>(
